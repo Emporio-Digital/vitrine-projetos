@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELOCITY | Hypercar Experience</title>
+    
+    <!-- Tailwind CSS (CDN para prototipagem rápida) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Orbitron', 'sans-serif'],
+                        body: ['Rajdhani', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: '#00f3ff', // Cyan Neon
+                        dark: '#0a0a0a',
+                        surface: '#111111'
+                    },
+                    animation: {
+                        'slow-spin': 'spin 10s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Estilos Customizados que o Tailwind não cobre nativamente */
+        body {
+            background-color: #050505;
+            color: white;
+            cursor: none; /* Escondendo cursor padrão para usar o customizado */
+            overflow-x: hidden;
+        }
+
+        /* Cursor Personalizado */
+        .cursor-outer {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(0, 243, 255, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out;
+            mix-blend-mode: difference;
+        }
+        .cursor-inner {
+            width: 8px;
+            height: 8px;
+            background-color: #00f3ff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Efeito de Vidro (Glassmorphism) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00f3ff; }
+
+        /* Utilitários de Animação de Entrada */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="selection:bg-brand selection:text-black">
+
+    <!-- Elementos do Cursor -->
+    <div class="cursor-outer hidden md:block"></div>
+    <div class="cursor-inner hidden md:block"></div>
+
+    <!-- Navegação -->
+    <nav class="fixed w-full z-50 px-6 py-6 flex justify-between items-center glass-panel border-b-0 border-white/5">
+        <div class="flex items-center gap-2 group cursor-pointer">
+            <div class="w-8 h-8 border border-brand/50 rounded-full flex items-center justify-center group-hover:bg-brand group-hover:text-black transition-all duration-300">
+                <span class="font-display font-bold text-lg">V</span>
+            </div>
+            <span class="font-display font-bold tracking-[0.2em] text-sm group-hover:text-brand transition-colors">VELOCITY</span>
+        </div>
+
+        <div class="hidden md:flex gap-12 font-body text-sm tracking-widest uppercase text-gray-400">
+            <a href="#" class="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-[1px] after:bg-brand hover:after:w-full after:transition-all duration-300">Modelos</a>
+            <a href="#" class="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-[1px] after:bg-brand hover:after:w-full after:transition-all duration-300">Inovação</a>
+            <a href="#" class="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-[1px] after:bg-brand hover:after:w-full after:transition-all duration-300">Experiência</a>
+        </div>
+
+        <button class="border border-white/20 px-6 py-2 rounded-none text-xs uppercase tracking-[0.2em] font-bold hover:bg-brand hover:text-black hover:border-brand transition-all duration-500 hover:shadow-[0_0_20px_rgba(0,243,255,0.4)]">
+            Pré-Reserva
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative w-full h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Imagem -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2070&auto=format&fit=crop" 
+                 class="w-full h-full object-cover opacity-60 scale-105 animate-[pulse_10s_ease-in-out_infinite] grayscale-[30%]">
+            <!-- Overlay Gradiente para texto ler melhor -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-transparent to-[#050505]/80"></div>
+        </div>
+
+        <!-- Conteúdo Hero -->
+        <div class="relative z-10 text-center flex flex-col items-center max-w-4xl px-4">
+            <span class="text-brand font-body tracking-[0.5em] uppercase text-xs md:text-sm mb-4 fade-up js-scroll">Conceito 2026</span>
+            
+            <h1 class="font-display text-5xl md:text-9xl font-black uppercase tracking-tighter mb-2 fade-up js-scroll" style="transition-delay: 100ms;">
+                AERO<span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600">BLADE</span>
+            </h1>
+            
+            <p class="text-gray-400 font-body text-base md:text-xl max-w-xl leading-relaxed mb-10 fade-up js-scroll" style="transition-delay: 200ms;">
+                Onde a aerodinâmica encontra a arte digital. <br>O primeiro hypercar projetado por inteligência artificial.
+            </p>
+
+            <div class="flex gap-6 fade-up js-scroll" style="transition-delay: 300ms;">
+                <button class="bg-white text-black px-8 py-4 font-display font-bold uppercase tracking-wider text-sm hover:bg-brand transition-colors duration-300">
+                    Configurar
+                </button>
+                <button class="border border-white/30 text-white px-8 py-4 font-display font-bold uppercase tracking-wider text-sm hover:border-white hover:bg-white/5 transition-all duration-300 backdrop-blur-sm">
+                    Ver Trailer
+                </button>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+            <div class="w-[1px] h-16 bg-gradient-to-b from-transparent via-brand to-transparent animate-pulse"></div>
+            <span class="text-[10px] uppercase tracking-widest font-body text-brand">Scroll</span>
+        </div>
+    </header>
+
+    <!-- Specs Grid Section -->
+    <section class="py-24 px-6 md:px-12 bg-[#050505] relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                
+                <!-- Titulo Lateral -->
+                <div class="md:col-span-3 flex flex-col justify-center border-l border-white/10 pl-6 fade-up js-scroll">
+                    <h2 class="font-display text-4xl font-bold mb-2">PURE <br><span class="text-brand">DATA</span></h2>
+                    <p class="text-gray-500 text-sm font-body leading-relaxed">Métricas que desafiam a física. Testado em túnel de vento virtual.</p>
+                </div>
+
+                <!-- Cards de Specs -->
+                <div class="md:col-span-3 glass-panel p-8 hover:bg-white/5 transition-all duration-500 group fade-up js-scroll" style="transition-delay: 100ms;">
+                    <i data-lucide="zap" class="text-brand mb-4 w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-5xl font-display font-bold mb-1">1.9<span class="text-lg text-gray-500">s</span></h3>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest mt-2">0 - 100 km/h</p>
+                </div>
+
+                <div class="md:col-span-3 glass-panel p-8 hover:bg-white/5 transition-all duration-500 group fade-up js-scroll" style="transition-delay: 200ms;">
+                    <i data-lucide="wind" class="text-brand mb-4 w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-5xl font-display font-bold mb-1">420<span class="text-lg text-gray-500">km/h</span></h3>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest mt-2">Velocidade Top</p>
+                </div>
+
+                <div class="md:col-span-3 glass-panel p-8 hover:bg-white/5 transition-all duration-500 group fade-up js-scroll" style="transition-delay: 300ms;">
+                    <i data-lucide="battery-charging" class="text-brand mb-4 w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="text-5xl font-display font-bold mb-1">1000<span class="text-lg text-gray-500">km</span></h3>
+                    <p class="text-gray-400 text-xs uppercase tracking-widest mt-2">Autonomia Solid-State</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Image Section -->
+    <section class="h-screen relative flex items-center bg-[#080808] border-y border-white/5 overflow-hidden">
+        <div class="absolute inset-0 flex">
+            <div class="w-1/2 h-full bg-[url('https://images.unsplash.com/photo-1542282088-fe8426682b8f?q=80&w=1974&auto=format&fit=crop')] bg-cover bg-center grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out cursor-crosshair group">
+                <div class="absolute inset-0 bg-black/50 group-hover:bg-transparent transition-all duration-1000 flex items-center justify-center">
+                    <span class="font-display text-2xl tracking-widest border border-white/30 px-6 py-2 uppercase backdrop-blur-md group-hover:opacity-0 transition-opacity">Exterior</span>
+                </div>
+            </div>
+            <div class="w-1/2 h-full bg-[url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out cursor-crosshair group">
+                <div class="absolute inset-0 bg-black/50 group-hover:bg-transparent transition-all duration-1000 flex items-center justify-center">
+                     <span class="font-display text-2xl tracking-widest border border-white/30 px-6 py-2 uppercase backdrop-blur-md group-hover:opacity-0 transition-opacity">Interior</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Center Floating Badge -->
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
+            <div class="w-24 h-24 bg-black border border-brand/30 rounded-full flex items-center justify-center backdrop-blur-xl">
+                <span class="text-brand text-xs font-bold uppercase text-center leading-tight">Dual<br>View</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center border-t border-white/5 bg-[#050505]">
+        <h2 class="font-display text-2xl md:text-4xl font-bold mb-6 text-white/20 hover:text-white transition-colors cursor-default select-none">VELOCITY MOTORS</h2>
+        <div class="text-gray-600 text-xs uppercase tracking-widest">
+            São Paulo • Tokyo • Berlin • New York
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Inicializar ícones
+        lucide.createIcons();
+
+        // Lógica do Custom Cursor
+        const cursorOuter = document.querySelector('.cursor-outer');
+        const cursorInner = document.querySelector('.cursor-inner');
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            // Movimento direto para o ponto interno
+            cursorInner.style.transform = `translate3d(${x - 4}px, ${y - 4}px, 0)`;
+            
+            // Movimento com delay para o círculo externo (efeito fluido)
+            cursorOuter.animate({
+                transform: `translate3d(${x - 20}px, ${y - 20}px, 0)`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Hover Effect nos Links (Aumenta o cursor)
+        const links = document.querySelectorAll('a, button, .cursor-pointer');
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursorOuter.style.borderColor = '#ffffff';
+                cursorOuter.style.transform += ' scale(1.5)';
+            });
+            link.addEventListener('mouseleave', () => {
+                cursorOuter.style.borderColor = 'rgba(0, 243, 255, 0.5)';
+                cursorOuter.style.transform = cursorOuter.style.transform.replace(' scale(1.5)', '');
+            });
+        });
+
+        // Scroll Reveal Animation (Simples e Leve)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Anima apenas uma vez
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.js-scroll').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
