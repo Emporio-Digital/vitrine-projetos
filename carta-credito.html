@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Consórcios | Condição Exclusiva Fevereiro</title>
+    <meta name="description" content="Garanta sua carta de crédito com entrada reduzida de apenas 10%. Livre-se dos juros abusivos.">
+    
+    <style>
+        /* --- 1. VARIÁVEIS E RESET --- */
+        :root {
+            --primary: #0f172a; /* Azul Navy Profundo */
+            --secondary: #d97706; /* Dourado/Bronze */
+            --accent: #22c55e; /* Verde WhatsApp */
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --white: #ffffff;
+            --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--light); color: var(--dark); overflow-x: hidden; line-height: 1.6; }
+        img { max-width: 100%; display: block; object-fit: cover; }
+
+        /* --- 2. UTILITÁRIOS E BOTÕES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .text-center { text-align: center; }
+        
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 16px 32px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            border-radius: 50px; text-decoration: none; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; border: none; font-size: 1rem;
+        }
+        
+        .btn-primary { background: var(--secondary); color: white; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(217, 119, 6, 0.4); background: #b45309; }
+        
+        .btn-whatsapp { background: var(--accent); color: white; gap: 10px; }
+        .btn-whatsapp:hover { background: #16a34a; transform: scale(1.05); }
+
+        /* --- 3. HEADER FIXO --- */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding: 15px 0;
+        }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 900; color: white; letter-spacing: -1px; }
+        .logo span { color: var(--secondary); }
+        .nav-btn { padding: 10px 20px; font-size: 0.9rem; }
+
+        /* --- 4. HERO SECTION --- */
+        .hero {
+            padding: 140px 0 80px;
+            background: var(--gradient-hero);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover; background-position: center;
+            opacity: 0.15; z-index: 0; mix-blend-mode: overlay;
+        }
+
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+        .hero-content h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; }
+        .hero-content p { font-size: 1.2rem; color: #cbd5e1; margin-bottom: 40px; max-width: 90%; }
+
+        .promo-tag {
+            display: inline-block; background: rgba(217, 119, 6, 0.2); color: var(--secondary);
+            border: 1px solid var(--secondary); padding: 5px 15px; border-radius: 20px;
+            font-weight: 700; font-size: 0.9rem; margin-bottom: 20px; text-transform: uppercase;
+        }
+
+        .hero-image-wrapper { position: relative; }
+        .hero-image {
+            width: 100%; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1); transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.5s ease;
+        }
+        .hero-image:hover { transform: perspective(1000px) rotateY(0deg); }
+
+        .floating-card {
+            position: absolute; bottom: 30px; left: -30px;
+            background: white; color: var(--primary); padding: 20px;
+            border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex; align-items: center; gap: 15px;
+            animation: float 4s ease-in-out infinite;
+        }
+        .floating-card .icon { font-size: 2rem; }
+
+        /* --- 5. FAIXA URGÊNCIA --- */
+        .urgency-bar { background: var(--secondary); color: white; padding: 15px 0; font-weight: 600; text-align: center; position: relative; z-index: 2; }
+        .timer { font-weight: 800; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 4px; margin-left: 10px; }
+
+        /* --- 6. GALERIA --- */
+        .dream-gallery { padding: 80px 0; background: var(--white); }
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 40px;
+        }
+        .gallery-item {
+            position: relative; height: 350px; border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow-card); group: 1;
+        }
+        .gallery-item img { width: 100%; height: 100%; transition: transform 0.5s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .overlay-text {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white; padding: 30px 20px;
+        }
+        .overlay-text h3 { font-size: 1.5rem; margin-bottom: 5px; }
+        .overlay-text p { font-size: 0.9rem; opacity: 0.9; }
+
+        /* --- 7. BENEFÍCIOS --- */
+        .benefits { padding: 100px 0; background: var(--light); }
+        .section-header { text-align: center; margin-bottom: 60px; max-width: 800px; margin: 0 auto 60px; }
+        .section-header h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card {
+            background: white; padding: 40px 30px; border-radius: var(--radius);
+            transition: all 0.3s ease; border: 1px solid #e2e8f0;
+        }
+        .feature-card:hover { border-color: var(--secondary); box-shadow: var(--shadow-card); transform: translateY(-10px); }
+        .feature-icon {
+            width: 60px; height: 60px; background: rgba(15, 23, 42, 0.05); color: var(--primary);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; margin-bottom: 25px; transition: 0.3s;
+        }
+        .feature-card:hover .feature-icon { background: var(--secondary); color: white; }
+
+        /* --- 8. CONFIANÇA --- */
+        .trust-section { padding: 100px 0; background: white; }
+        .trust-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .trust-img-wrapper { position: relative; }
+        .trust-img { border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); width: 100%; }
+        .trust-badge {
+            position: absolute; top: -20px; right: -20px;
+            background: var(--secondary); color: white; padding: 20px;
+            border-radius: 50%; width: 100px; height: 100px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            font-weight: 800; text-align: center; box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3);
+            font-size: 0.8rem;
+        }
+        .trust-content h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
+        .check-list { list-style: none; margin-top: 20px; }
+        .check-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
+        .check-list li svg { color: var(--accent); width: 20px; height: 20px; flex-shrink: 0; }
+
+        /* --- 9. COMO FUNCIONA --- */
+        .steps-section { padding: 100px 0; background: #f1f5f9; }
+        .steps-container { display: flex; justify-content: space-between; flex-wrap: wrap; margin-top: 50px; }
+        .step-item { flex: 1; min-width: 250px; text-align: center; padding: 20px; position: relative; }
+        .step-num {
+            font-size: 4rem; font-weight: 900; color: rgba(217, 119, 6, 0.15);
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 0;
+        }
+        .step-content { position: relative; z-index: 1; margin-top: 30px; }
+
+        /* --- 10. PROVA SOCIAL --- */
+        .testimonial-card {
+            text-align: left; border-left: 4px solid var(--secondary); padding: 30px;
+            background: #f8fafc; border-radius: 0 var(--radius) var(--radius) 0;
+            display: flex; flex-direction: column; height: 100%;
+        }
+        .testimonial-user { display: flex; align-items: center; gap: 15px; margin-top: auto; pt-4; }
+        .avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; }
+        .user-info strong { display: block; color: var(--primary); }
+        .user-info span { font-size: 0.85rem; color: #64748b; }
+
+        /* --- CTA FINAL --- */
+        .cta-section {
+            padding: 80px 0; background: var(--primary); color: white; text-align: center;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+        }
+
+        /* --- WHATSAPP FLUTUANTE --- */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 65px; height: 65px; background: #25D366; color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 35px; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 2000; animation: pulse 2s infinite;
+        }
+        .tooltip-wa {
+            position: absolute; right: 80px; background: white; color: var(--primary);
+            padding: 8px 15px; border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); white-space: nowrap; opacity: 0; 
+            transition: 0.3s; pointer-events: none;
+        }
+        .whatsapp-float:hover .tooltip-wa { opacity: 1; transform: translateX(-10px); }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+
+        @media(max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-image { display: none; }
+            .trust-grid { grid-template-columns: 1fr; }
+            .trust-img-wrapper { order: -1; margin-bottom: 30px; }
+            .steps-container { flex-direction: column; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Fixo -->
+    <header>
+        <div class="container nav-content">
+            <div class="logo">NEXUS<span>CONSÓRCIOS</span></div>
+            <a href="https://wa.me/5511999999999" class="btn btn-primary nav-btn">Simular Agora</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-img"></div> 
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="promo-tag">🔥 Exclusivo Fevereiro</span>
+                <h1>Chegou a hora de parar de pagar <span style="color:var(--secondary)">Juros Abusivos</span></h1>
+                <p>O sistema inteligente para quem quer comprar imóveis e veículos pagando o preço justo. Entrada promocional reduzida de <span style="text-decoration: line-through; opacity:0.7">15%</span> para <strong>10%</strong>.</p>
+                
+                <a href="https://wa.me/5511999999999?text=Quero%20aproveitar%20a%20entrada%20de%2010%25" class="btn btn-whatsapp">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.654-.698c.99.54 2.132.829 3.286.832h.001c3.181 0 5.768-2.586 5.768-5.766-.001-3.181-2.587-5.767-5.768-5.767zm0 10.334h-.001c-1.026-.001-2.032-.276-2.909-.797l-.208-.124-2.164.568.578-2.109-.136-.215c-.569-.904-.869-1.954-.869-3.042.001-2.483 2.022-4.502 4.505-4.502 2.484 0 4.505 2.021 4.505 4.504 0 2.485-2.021 4.504-4.505 4.504z"/></svg>
+                    Garantir Minha Condição
+                </a>
+                
+                <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.8;">*Oferta válida até o fim do contador.</p>
+            </div>
+
+            <div class="hero-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Casa de Luxo Moderna" class="hero-image">
+                <div class="floating-card">
+                    <div class="icon">🏠</div>
+                    <div>
+                        <small>Crédito Liberado</small>
+                        <strong>R$ 500.000,00</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Urgency Bar -->
+    <div class="urgency-bar">
+        ⚠️ ATENÇÃO: Restam poucas vagas com entrada de 10%. Encerra em: <span class="timer" id="timer">00d 00h 00m</span>
+    </div>
+
+    <!-- GALERIA VISUAL -->
+    <section class="dream-gallery">
+        <div class="container text-center">
+            <h2 style="font-size: 2.2rem; color: var(--primary);">O que você vai conquistar?</h2>
+            <p style="color: #64748b; margin-top: 10px;">Escolha a categoria e nós montamos o plano perfeito.</p>
+            
+            <div class="gallery-grid">
+                <!-- Item 1: Imóveis -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1600596542815-22b845069566?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Casa com piscina">
+                    <div class="overlay-text">
+                        <h3>Imóveis</h3>
+                        <p>Casas, aptos, terrenos ou construção.</p>
+                    </div>
+                </div>
+                <!-- Item 2: Automóveis -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Carro de luxo">
+                    <div class="overlay-text">
+                        <h3>Automóveis</h3>
+                        <p>O carro dos sonhos sem juros bancários.</p>
+                    </div>
+                </div>
+                <!-- Item 3: Pesados/Frota -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Caminhão Frota">
+                    <div class="overlay-text">
+                        <h3>Pesados & Frotas</h3>
+                        <p>Caminhões e maquinário para sua empresa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefícios -->
+    <section class="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2>O jeito inteligente de investir</h2>
+                <p>Esqueça a burocracia. Compare e veja porque o consórcio é superior.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💸</div>
+                    <h3>Economia Real</h3>
+                    <p>Sem juros. Você paga apenas taxa administrativa fixa, economizando até 60% comparado ao financiamento.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Planejamento Flexível</h3>
+                    <p>Planos de 50 a 200 meses. Ajuste o valor da parcela conforme sua necessidade.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Acelere com Lances</h3>
+                    <p>Use seu FGTS (imóveis) ou parte do próprio crédito (lance embutido) para antecipar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE CONFIANÇA -->
+    <section class="trust-section">
+        <div class="container trust-grid">
+            <div class="trust-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Consultor entregando chave" class="trust-img">
+                <div class="trust-badge">
+                    <span>15+</span>
+                    ANOS
+                </div>
+            </div>
+            <div class="trust-content">
+                <h2>A segurança de quem já entregou milhares de sonhos</h2>
+                <p style="color: #475569; font-size: 1.1rem;">Não somos apenas vendedores de cotas. Somos consultores financeiros especializados em alavancagem patrimonial. Nossa equipe acompanha você do primeiro pagamento até a entrega das chaves.</p>
+                
+                <ul class="check-list">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Assessoria completa para lances estratégicos.
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Aprovação de crédito facilitada.
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Liberdade para escolher o imóvel ou veículo.
+                    </li>
+                </ul>
+                <br>
+                <a href="https://wa.me/5511999999999" class="btn btn-primary">Conhecer a Nexus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona -->
+    <section class="steps-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Do planejamento à chave na mão</h2>
+            </div>
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-num">01</div>
+                    <div class="step-content">
+                        <h4>Simulação</h4>
+                        <p>Definimos o crédito e parcela ideal para seu orçamento.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">02</div>
+                    <div class="step-content">
+                        <h4>Adesão</h4>
+                        <p>Entrada promocional de apenas 10% neste mês.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">03</div>
+                    <div class="step-content">
+                        <h4>Contemplação</h4>
+                        <p>Sorteios mensais ou lances estratégicos.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">04</div>
+                    <div class="step-content">
+                        <h4>Conquista</h4>
+                        <p>Carta na mão! Compre seu bem à vista.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prova Social (COM FOTOS) -->
+    <section class="benefits" style="background-color: white;">
+        <div class="container text-center">
+            <h2 style="color:var(--primary); margin-bottom: 40px;">Quem fez as contas, escolheu a Nexus</h2>
+            <div class="cards-grid">
+                <!-- Depoimento 1 -->
+                <div class="testimonial-card">
+                    <p style="font-style: italic; margin-bottom: 15px;">"Eu ia financiar um apartamento e pagaria 3 imóveis no final. Com a carta de crédito, economizei mais de 200 mil reais e fui contemplado no 4º mês."</p>
+                    <div class="testimonial-user">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Foto Ricardo" class="avatar">
+                        <div class="user-info">
+                            <strong>Ricardo Mendes</strong>
+                            <span>Engenheiro Civil</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Depoimento 2 -->
+                <div class="testimonial-card">
+                    <p style="font-style: italic; margin-bottom: 15px;">"A entrada reduzida foi o que me permitiu começar. O atendimento da equipe no WhatsApp foi super rápido e tiraram todas as minhas dúvidas."</p>
+                    <div class="testimonial-user">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80" alt="Foto Juliana" class="avatar">
+                        <div class="user-info">
+                            <strong>Juliana Silva</strong>
+                            <span>Médica Veterinária</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Depoimento 3 -->
+                <div class="testimonial-card">
+                    <p style="font-style: italic; margin-bottom: 15px;">"Comprei meu primeiro caminhão para agregar na transportadora. A Nexus me ajudou a calcular o lance certo."</p>
+                    <div class="testimonial-user">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" alt="Foto Carlos" class="avatar">
+                        <div class="user-info">
+                            <strong>Carlos Eduardo</strong>
+                            <span>Autônomo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <footer class="cta-section">
+        <div class="container cta-box">
+            <h2>Não perca a condição de Fevereiro</h2>
+            <p>As vagas para o grupo com entrada de 10% são limitadas e podem acabar a qualquer momento.</p>
+            <a href="https://wa.me/5511999999999?text=Quero%20minha%20carta%20agora" class="btn btn-primary" style="font-size: 1.2rem; padding: 20px 40px;">
+                Falar com Consultor Agora
+            </a>
+            <div style="margin-top: 40px; font-size: 0.8rem; opacity: 0.5;">
+                <p>&copy; 2024 Nexus Consórcios. Todos os direitos reservados. <br> Condições sujeitas à análise de crédito e disponibilidade de grupos.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Flutuante -->
+    <a href="https://wa.me/5511999999999?text=Olá,%20vi%20o%20site%20e%20tenho%20interesse." class="whatsapp-float" target="_blank">
+        <div class="tooltip-wa">Fale Conosco</div>
+        <svg width="35" height="35" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.654-.698c.99.54 2.132.829 3.286.832h.001c3.181 0 5.768-2.586 5.768-5.766-.001-3.181-2.587-5.767-5.768-5.767zm0 10.334h-.001c-1.026-.001-2.032-.276-2.909-.797l-.208-.124-2.164.568.578-2.109-.136-.215c-.569-.904-.869-1.954-.869-3.042.001-2.483 2.022-4.502 4.505-4.502 2.484 0 4.505 2.021 4.505 4.504 0 2.485-2.021 4.504-4.505 4.504z"/></svg>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        function startCountdown() {
+            const timerElement = document.getElementById('timer');
+            const date = new Date();
+            date.setDate(date.getDate() + 2); 
+            
+            function update() {
+                const now = new Date().getTime();
+                const distance = date - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                timerElement.innerHTML = `${days}d ${hours}h ${minutes}m`;
+            }
+            setInterval(update, 1000);
+            update();
+        }
+
+        window.addEventListener('scroll', reveal);
+        function reveal(){
+            var reveals = document.querySelectorAll('.feature-card, .step-item, .gallery-item, .testimonial-card');
+            for(var i = 0; i < reveals.length; i++){
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 150;
+                if(revealtop < windowheight - revealpoint){
+                    reveals[i].style.opacity = '1';
+                    reveals[i].style.transform = 'translateY(0)';
+                }
+            }
+        }
+        
+        document.querySelectorAll('.feature-card, .step-item, .gallery-item, .testimonial-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+        });
+
+        startCountdown();
+    </script>
+</body>
+</html>

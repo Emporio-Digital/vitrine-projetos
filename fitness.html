@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Force Fitness - Elite Gym</title>
+    <!-- Fontes Modernas -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CONFIGURAÇÕES GERAIS --- */
+        :root {
+            --primary: #ceff00;    /* Neon Acid Green */
+            --dark-bg: #050505;    /* Preto Profundo */
+            --surface: #0f0f0f;    /* Cinza muito escuro para cards */
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-gray: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--dark-bg);
+            color: #fff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- ANIMAÇÕES --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- HEADER GLASS --- */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .logo span { color: var(--primary); }
+
+        nav ul { display: flex; gap: 40px; list-style: none; }
+        
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        nav a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0;
+            width: 0; height: 2px; background: var(--primary); transition: 0.3s;
+        }
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: var(--primary); }
+
+        .btn-login {
+            padding: 10px 30px;
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            background: transparent;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-login:hover {
+            background: var(--primary);
+            color: #000;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(206, 255, 0, 0.3);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 8%;
+            background: radial-gradient(circle at 80% 20%, rgba(206,255,0,0.08), transparent 40%),
+                        linear-gradient(to right, #050505 40%, rgba(5,5,5,0.4)),
+                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-content { max-width: 650px; z-index: 2; }
+
+        .badge {
+            background: rgba(206, 255, 0, 0.1);
+            color: var(--primary);
+            padding: 8px 16px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border: 1px solid rgba(206, 255, 0, 0.3);
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 5rem;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: transparent;
+            -webkit-text-stroke: 1px #fff;
+            position: relative;
+        }
+        
+        h1 span::before {
+            content: 'HARD';
+            position: absolute; left: 0; color: var(--primary);
+            width: 0; overflow: hidden; transition: 1s ease-in-out;
+            border-right: 4px solid var(--primary); -webkit-text-stroke: 0;
+        }
+        .hero:hover h1 span::before { width: 100%; }
+
+        p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 480px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #000;
+            padding: 16px 40px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(206, 255, 0, 0.2);
+        }
+
+        /* Card Flutuante */
+        .glass-card {
+            position: absolute;
+            right: 12%; bottom: 15%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex; gap: 15px; align-items: center;
+            animation: float 5s ease-in-out infinite;
+            max-width: 280px;
+        }
+        .icon-box {
+            width: 50px; height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; color: #000;
+        }
+        .glass-card h4 { font-family: 'Oswald'; font-size: 1.4rem; color: #fff; }
+        .glass-card span { font-size: 0.85rem; color: #bbb; }
+
+        /* --- STATS --- */
+        .stats-bar {
+            background: #0a0a0a;
+            padding: 50px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .stats-grid { display: flex; justify-content: space-around; text-align: center; }
+        .stat h3 { font-family: 'Oswald'; font-size: 2.5rem; color: var(--primary); }
+        .stat p { color: #888; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- SECTIONS COMMON --- */
+        .section-padding { padding: 100px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header span { color: var(--primary); font-family: 'Oswald'; text-transform: uppercase; letter-spacing: 2px; }
+        .section-header h2 { font-family: 'Oswald'; font-size: 3rem; text-transform: uppercase; color: #fff; margin-top: 10px; }
+
+        /* --- MODALIDADES --- */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.4s;
+            position: relative;
+            group: 1;
+        }
+
+        .card-img {
+            height: 250px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.6s;
+        }
+
+        .card:hover .card-img img { transform: scale(1.1); }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+
+        .card-body { padding: 25px; }
+        .card-body h3 { font-family: 'Oswald'; font-size: 1.5rem; margin-bottom: 10px; text-transform: uppercase; }
+        .card-body p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px; }
+        .card-link { color: var(--primary); text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+
+        /* --- ABOUT --- */
+        .about-section { display: flex; gap: 60px; align-items: center; }
+        .about-img { flex: 1; position: relative; }
+        .about-img img { width: 100%; border-radius: 8px; filter: grayscale(100%); transition: 0.5s; }
+        .about-img:hover img { filter: grayscale(0%); }
+        
+        .about-content { flex: 1; }
+        .about-content h2 { font-family: 'Oswald'; font-size: 3rem; margin-bottom: 20px; text-transform: uppercase; line-height: 1.1; }
+        .about-content p { color: var(--text-gray); margin-bottom: 30px; }
+        
+        .feature-list li {
+            list-style: none; margin-bottom: 15px; display: flex; align-items: center; gap: 15px;
+            font-size: 1.1rem; color: #fff;
+        }
+        .feature-list i { color: var(--primary); }
+
+        /* --- PLANOS --- */
+        .plans-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        
+        .plan-box {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            width: 350px;
+            border-radius: 12px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .plan-box.highlight {
+            border: 1px solid var(--primary);
+            background: rgba(206, 255, 0, 0.03);
+            transform: scale(1.05);
+        }
+
+        .plan-box h3 { font-family: 'Oswald'; font-size: 1.5rem; margin-bottom: 15px; text-transform: uppercase; }
+        .price { font-size: 3rem; font-weight: 700; color: #fff; font-family: 'Oswald'; margin-bottom: 20px; }
+        .price span { font-size: 1rem; color: var(--text-gray); font-weight: 400; }
+        
+        .benefits { list-style: none; margin-bottom: 30px; text-align: left; }
+        .benefits li { margin-bottom: 12px; color: #ccc; font-size: 0.95rem; }
+        .benefits li i { color: var(--primary); margin-right: 8px; }
+        .benefits li.off { color: #555; text-decoration: line-through; }
+        .benefits li.off i { color: #555; }
+
+        .btn-plan {
+            width: 100%; padding: 15px; background: transparent; border: 1px solid #fff;
+            color: #fff; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s;
+        }
+        .highlight .btn-plan { background: var(--primary); border-color: var(--primary); color: #000; }
+        .btn-plan:hover { background: #fff; color: #000; border-color: #fff; }
+
+        /* --- FOOTER --- */
+        footer { background: #020202; padding: 60px 0 20px; border-top: 1px solid var(--border); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: #fff; font-family: 'Oswald'; margin-bottom: 20px; text-transform: uppercase; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col a { color: var(--text-gray); text-decoration: none; transition: 0.3s; }
+        .footer-col a:hover { color: var(--primary); }
+        
+        .socials { display: flex; gap: 15px; }
+        .socials i { color: #fff; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
+        .socials i:hover { color: var(--primary); }
+
+        .copyright { text-align: center; color: #444; font-size: 0.8rem; pt: 20px; border-top: 1px solid var(--border); padding-top: 20px; }
+
+        /* --- RESPONSIVO --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .about-section { flex-direction: column; }
+            .plan-box.highlight { transform: scale(1); }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <a href="#" class="logo">IRON<span>FORCE</span></a>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#modalidades">Modalidades</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#planos">Planos</a></li>
+            </ul>
+        </nav>
+        <button class="btn-login">Área do Aluno</button>
+    </header>
+
+    <!-- HERO -->
+    <section id="home" class="hero">
+        <div class="hero-content reveal">
+            <div class="badge">🔥 ACADEMIA DE ALTA PERFORMANCE</div>
+            <h1>TREINE <span>HARD</span> <br> VIVA FORTE</h1>
+            <p>Infraestrutura de nível mundial, treinadores de elite e uma comunidade focada em resultados. Sua transformação começa aqui.</p>
+            <button class="btn-primary">Começar Agora</button>
+        </div>
+
+        <!-- Card Flutuante -->
+        <div class="glass-card">
+            <div class="icon-box"><i class="fas fa-fire"></i></div>
+            <div>
+                <h4>500+ Kcal</h4>
+                <span>Queima média por treino</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="stats-bar reveal">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat">
+                    <h3>24h</h3>
+                    <p>Funcionamento</p>
+                </div>
+                <div class="stat">
+                    <h3>50+</h3>
+                    <p>Equipamentos</p>
+                </div>
+                <div class="stat">
+                    <h3>2K+</h3>
+                    <p>Alunos Ativos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALIDADES -->
+    <section id="modalidades" class="section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <span>Nossas Áreas</span>
+                <h2>Modalidades</h2>
+            </div>
+
+            <div class="grid-cards reveal">
+                <!-- Musculação -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=1470&auto=format&fit=crop" alt="Musculação">
+                    </div>
+                    <div class="card-body">
+                        <h3>Musculação</h3>
+                        <p>Área completa com pesos livres e máquinas biomecânicas de última geração.</p>
+                        <a href="#" class="card-link">Saiba Mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Boxe -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=1374&auto=format&fit=crop" alt="Boxe">
+                    </div>
+                    <div class="card-body">
+                        <h3>Boxe & Muay Thai</h3>
+                        <p>Octógono oficial e ringue para treinos de alta intensidade e combate.</p>
+                        <a href="#" class="card-link">Saiba Mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Cross (IMAGEM ADICIONADA) -->
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=1470&auto=format&fit=crop" alt="Crossfit">
+                    </div>
+                    <div class="card-body">
+                        <h3>Cross Training</h3>
+                        <p>Treinamento funcional intenso para desenvolver força, cardio e resistência.</p>
+                        <a href="#" class="card-link">Saiba Mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="section-padding" style="background: #080808;">
+        <div class="container">
+            <div class="about-section reveal">
+                <div class="about-img">
+                    <img src="https://images.unsplash.com/photo-1623874514711-0f321325f318?q=80&w=1470&auto=format&fit=crop" alt="Interior da Academia">
+                </div>
+                <div class="about-content">
+                    <h2>Mais que uma academia,<br>um estilo de vida.</h2>
+                    <p>Fundada para quem não aceita o básico. Na Iron Force, combinamos tecnologia, ambiente motivador e profissionais apaixonados para extrair o melhor de você.</p>
+                    
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> Ambientes Climatizados</li>
+                        <li><i class="fas fa-check-circle"></i> App de Treino Integrado</li>
+                        <li><i class="fas fa-check-circle"></i> Estacionamento Gratuito</li>
+                        <li><i class="fas fa-check-circle"></i> Vestiários Premium</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLANOS -->
+    <section id="planos" class="section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <span>Investimento</span>
+                <h2>Escolha seu Plano</h2>
+            </div>
+            
+            <div class="plans-grid reveal">
+                <!-- Start -->
+                <div class="plan-box">
+                    <h3>Iron Start</h3>
+                    <div class="price">R$ 89<span>/mês</span></div>
+                    <ul class="benefits">
+                        <li><i class="fas fa-check"></i> Musculação Livre</li>
+                        <li><i class="fas fa-check"></i> Sem Taxa de Adesão</li>
+                        <li><i class="fas fa-check"></i> Horário Econômico (10h-15h)</li>
+                        <li class="off"><i class="fas fa-times"></i> Aulas Coletivas</li>
+                        <li class="off"><i class="fas fa-times"></i> Acesso a Outras Unidades</li>
+                    </ul>
+                    <button class="btn-plan">Assinar Start</button>
+                </div>
+
+                <!-- Pro -->
+                <div class="plan-box highlight">
+                    <div style="color:var(--primary); font-size:0.8rem; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">Recomendado</div>
+                    <h3>Iron Pro</h3>
+                    <div class="price">R$ 119<span>/mês</span></div>
+                    <ul class="benefits">
+                        <li><i class="fas fa-check"></i> Acesso Total e Irrestrito</li>
+                        <li><i class="fas fa-check"></i> Todas as Aulas Coletivas</li>
+                        <li><i class="fas fa-check"></i> Levar 1 amigo (2x/mês)</li>
+                        <li><i class="fas fa-check"></i> App de Treino Exclusivo</li>
+                        <li><i class="fas fa-check"></i> Avaliação Física Grátis</li>
+                    </ul>
+                    <button class="btn-plan">Ser Pro</button>
+                </div>
+
+                <!-- Elite -->
+                <div class="plan-box">
+                    <h3>Iron Elite</h3>
+                    <div class="price">R$ 199<span>/mês</span></div>
+                    <ul class="benefits">
+                        <li><i class="fas fa-check"></i> Tudo do Plano Pro</li>
+                        <li><i class="fas fa-check"></i> Personal Trainer (1x/sem)</li>
+                        <li><i class="fas fa-check"></i> Acompanhamento Nutricional</li>
+                        <li><i class="fas fa-check"></i> Kit Iron Force (Camiseta + Shaker)</li>
+                        <li><i class="fas fa-check"></i> Acesso VIP a eventos</li>
+                    </ul>
+                    <button class="btn-plan">Assinar Elite</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo">IRON<span>FORCE</span></a>
+                    <p style="color:#888; margin-top:15px; font-size:0.9rem;">
+                        Transformando suor em conquista. Venha fazer parte da nossa família.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#modalidades">Modalidades</a></li>
+                        <li><a href="#planos">Planos</a></li>
+                        <li><a href="#">Trabalhe Conosco</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="#">(11) 99999-9999</a></li>
+                        <li><a href="#">contato@ironforce.com.br</a></li>
+                        <li><a href="#">Av. Paulista, 1000 - SP</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Redes Sociais</h4>
+                    <div class="socials">
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-facebook"></i>
+                        <i class="fab fa-youtube"></i>
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2024 Iron Force Fitness. Design by Sócio.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animação Simples de Scroll (Reveal)
+        window.addEventListener('scroll', reveal);
+
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 120;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        
+        // Trigger inicial para o Hero
+        reveal();
+    </script>
+</body>
+</html>
