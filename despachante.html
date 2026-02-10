@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despachante Elite | Soluções Veiculares Premium</title>
+    
+    <!-- Fontes Google (Sora para títulos e Inter para texto) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Ícones (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CONFIGURAÇÕES GERAIS E CORES --- */
+        :root {
+            --primary: #0f172a; /* Azul Escuro Profundo */
+            --primary-light: #1e293b;
+            --accent: #fbbf24; /* Dourado Brilhante */
+            --accent-hover: #d97706;
+            --whatsapp: #22c55e;
+            --text-body: #64748b;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --shadow: 0 10px 40px -10px rgba(0,0,0,0.3);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-body);
+            background-color: var(--light-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Sora', sans-serif; color: var(--primary); font-weight: 700; }
+        a { text-decoration: none; }
+        img { max-width: 100%; display: block; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* --- BOTÕES --- */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 14px 32px; border-radius: 8px; font-weight: 700;
+            transition: all 0.3s ease; cursor: pointer; gap: 10px;
+            text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            color: #0f172a; /* Texto escuro para contraste no amarelo */
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.5);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--white); color: var(--white);
+            background: rgba(0,0,0,0.3); backdrop-filter: blur(5px);
+        }
+
+        .btn-outline:hover { background-color: var(--white); color: var(--primary); }
+
+        /* --- HEADER FIXO --- */
+        header {
+            position: fixed; width: 100%; top: 0; z-index: 1000;
+            padding: 20px 0; transition: all 0.4s ease;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+        }
+
+        header.scrolled {
+            background: rgba(15, 23, 42, 0.95); /* Azul escuro sólido ao rolar */
+            padding: 15px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--white); text-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        .logo span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { color: var(--white); font-weight: 500; transition: 0.3s; font-size: 1rem; }
+        .nav-links a:hover { color: var(--accent); }
+
+        .menu-btn { display: none; color: white; font-size: 1.8rem; cursor: pointer; }
+
+        /* --- HERO SECTION (A NAVE) --- */
+        .hero {
+            height: 100vh; min-height: 700px;
+            /* Imagem de Carro Preto de Luxo (Audi style) */
+            background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%),
+                        url('https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            display: flex; align-items: center; position: relative;
+        }
+
+        .hero-content { max-width: 700px; padding-top: 60px; }
+
+        .hero-badge {
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid var(--accent); color: var(--accent);
+            padding: 8px 16px; border-radius: 50px; font-weight: 700;
+            font-size: 0.85rem; text-transform: uppercase; margin-bottom: 25px;
+            display: inline-block; backdrop-filter: blur(5px);
+        }
+
+        .hero h1 {
+            font-size: 3.8rem; line-height: 1.1; margin-bottom: 25px;
+            color: #ffffff; /* Branco Puro */
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.9); /* Sombra Forte */
+        }
+
+        .hero p {
+            font-size: 1.25rem; margin-bottom: 40px; color: #e2e8f0;
+            font-weight: 500; max-width: 90%;
+            text-shadow: 1px 1px 10px rgba(0,0,0,0.8);
+        }
+
+        .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; }
+
+        /* --- ESTATÍSTICAS FLUTUANTES --- */
+        .stats-container { margin-top: -80px; position: relative; z-index: 10; margin-bottom: 80px; }
+        
+        .stats-grid {
+            background: var(--white); border-radius: 20px; box-shadow: var(--shadow);
+            padding: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item { text-align: center; border-right: 1px solid #e2e8f0; }
+        .stat-item:last-child { border: none; }
+        .stat-item i { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
+        .stat-number { display: block; font-size: 2.2rem; font-weight: 800; color: var(--primary); }
+        .stat-label { color: #64748b; font-weight: 500; font-size: 0.95rem; }
+
+        /* --- SERVIÇOS --- */
+        .section-padding { padding: 80px 0; }
+        .section-header { text-align: center; margin-bottom: 60px; max-width: 800px; margin: 0 auto; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .section-header p { font-size: 1.1rem; }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+        .service-card {
+            background: var(--white); padding: 40px 30px; border-radius: 16px;
+            transition: 0.3s; border: 1px solid #f1f5f9; position: relative; overflow: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .card-icon {
+            width: 65px; height: 65px; background: #fffbeb; color: var(--accent);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; margin-bottom: 25px;
+        }
+        
+        .service-card h3 { font-size: 1.4rem; margin-bottom: 15px; }
+        .service-card ul li { margin-bottom: 10px; display: flex; gap: 10px; align-items: center; color: #475569; }
+        .service-card ul li i { color: var(--whatsapp); font-size: 0.9rem; }
+
+        /* --- SOBRE (DESIGN MODERNO) --- */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        
+        .about-images { position: relative; height: 500px; }
+        .img-main {
+            width: 85%; height: 100%; object-fit: cover; border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+        .img-float {
+            position: absolute; bottom: -30px; right: 0; width: 55%;
+            border: 8px solid var(--white); border-radius: 16px; box-shadow: var(--shadow);
+        }
+        
+        .about-text h2 { font-size: 2.5rem; margin-bottom: 25px; }
+        .check-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500; }
+        .check-list i { background: #ecfccb; color: #65a30d; padding: 6px; border-radius: 50%; font-size: 0.8rem; }
+
+        /* --- CTA PARCELAMENTO --- */
+        .cta-parallax {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)),
+                        url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=2070&auto=format&fit=crop') fixed center/cover;
+            padding: 100px 0; text-align: center; color: white;
+        }
+        .cta-parallax h2 { color: white; font-size: 2.8rem; margin-bottom: 15px; }
+        .brands { font-size: 3rem; margin: 30px 0; color: #cbd5e1; display: flex; justify-content: center; gap: 25px; opacity: 0.8; }
+
+        /* --- FAQ --- */
+        .faq-item { background: var(--white); margin-bottom: 15px; border-radius: 12px; border: 1px solid transparent; box-shadow: 0 2px 5px rgba(0,0,0,0.03); transition: 0.3s; }
+        .faq-item:hover { border-color: #cbd5e1; }
+        .faq-header { padding: 25px; cursor: pointer; display: flex; justify-content: space-between; font-weight: 600; color: var(--primary); }
+        .faq-body { max-height: 0; overflow: hidden; transition: 0.4s; padding: 0 25px; color: var(--text-body); }
+        .faq-item.active .faq-body { padding-bottom: 25px; max-height: 200px; }
+        .faq-item.active .faq-header i { transform: rotate(180deg); transition: 0.3s; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--primary); color: #94a3b8; padding: 80px 0 25px; }
+        .footer-logo { font-size: 2rem; color: white; font-weight: 800; margin-bottom: 20px; display: block; font-family: 'Sora', sans-serif;}
+        .footer-logo span { color: var(--accent); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 50px; margin-bottom: 30px; }
+        .footer-col h4 { color: white; margin-bottom: 25px; font-size: 1.2rem; }
+        .footer-col a { color: #94a3b8; display: block; margin-bottom: 12px; transition: 0.3s; }
+        .footer-col a:hover { color: var(--accent); padding-left: 5px; }
+
+        /* --- ZAP FLUTUANTE --- */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background: var(--whatsapp);
+            width: 65px; height: 65px; border-radius: 50%; color: white;
+            display: flex; align-items: center; justify-content: center; font-size: 34px;
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.5); z-index: 999;
+            transition: 0.3s;
+        }
+        .whatsapp-float:hover { transform: translateY(-5px) scale(1.1); }
+        
+        .pulse { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: inherit; opacity: 0.6; animation: pulse 2s infinite; z-index: -1; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.6); opacity: 0; } }
+
+        /* --- RESPONSIVIDADE (A CORREÇÃO MÁGICA) --- */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-images { height: 400px; margin-bottom: 40px; }
+            .stat-item { border: none; border-bottom: 1px solid #e2e8f0; padding-bottom: 20px; margin-bottom: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            /* AJUSTE MENU */
+            .nav-links {
+                position: fixed; top: 0; right: -100%; height: 100vh; width: 85%;
+                background: var(--white); flex-direction: column; justify-content: center;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.2); transition: 0.4s; z-index: 1002;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links a { color: var(--primary); font-size: 1.3rem; }
+            .menu-btn { display: block; }
+            
+            /* AJUSTE HERO (TOPO) */
+            .hero { 
+                text-align: center; 
+                justify-content: center; 
+                height: auto; 
+                min-height: 100vh;
+                padding-bottom: 60px; /* Espaço extra embaixo */
+            }
+            .hero-content { padding-top: 100px; padding-bottom: 20px; }
+            .hero h1 { font-size: 2.2rem; } 
+            .hero p { font-size: 1.1rem; }
+            .hero-btns { justify-content: center; flex-direction: column; }
+            .btn { width: 100%; } /* Botões largura total no mobile */
+
+            /* CORREÇÃO DO CARD FLUTUANTE (Aqui está a mágica) */
+            .stats-container { 
+                margin-top: 20px; /* Não sobe mais por cima da imagem */
+                margin-bottom: 40px;
+                transform: none; /* Remove efeito 3D que causava problema */
+            }
+            
+            .img-float { width: 60%; bottom: -20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <header id="header">
+        <div class="container navbar">
+            <a href="#" class="logo">Despachante<span>Elite</span></a>
+            
+            <div class="menu-btn" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <nav class="nav-links" id="nav-menu">
+                <a href="#home">Início</a>
+                <a href="#services">Serviços</a>
+                <a href="#about">Sobre</a>
+                <a href="#faq">Dúvidas</a>
+                <a href="https://wa.me/5511999999999" class="btn btn-primary" style="margin-left: 10px;">
+                    <i class="fab fa-whatsapp"></i> Falar no Zap
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION (A Nave) -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fas fa-star"></i> Excelência em Documentação</span>
+                <!-- TEXTO BRANCO FORTE -->
+                <h1>Dirija com liberdade. Sem burocracia.</h1>
+                <p>Regularize seu veículo com segurança e agilidade. Licenciamento, Transferência e Multas parceladas em até 12x no cartão.</p>
+                <div class="hero-btns">
+                    <a href="https://wa.me/5511999999999" class="btn btn-primary">
+                        Solicitar Orçamento <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#services" class="btn btn-outline">
+                        Conhecer Serviços
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATUS FLUTUANTE (Arrumado no Mobile) -->
+    <div class="container stats-container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <i class="fas fa-bolt"></i>
+                <span class="stat-number">Rápido</span>
+                <span class="stat-label">Documento no dia</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-users"></i>
+                <span class="stat-number">+10k</span>
+                <span class="stat-label">Clientes Satisfeitos</span>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-shield-alt"></i>
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Seguro e Oficial</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVIÇOS -->
+    <section class="section-padding" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>O que resolvemos para você</h2>
+                <p>Deixe a papelada chata com a gente e aproveite seu tempo.</p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Card 1 -->
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-file-contract"></i></div>
+                    <h3>Licenciamento 2024</h3>
+                    <p style="margin-bottom: 20px;">Evite apreensões. Emitimos o seu licenciamento anual digital na hora.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Envio PDF no WhatsApp</li>
+                        <li><i class="fas fa-check-circle"></i> Impressão disponível</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h3>Transferência</h3>
+                    <p style="margin-bottom: 20px;">Comprou ou vendeu? Cuidamos de toda a documentação com segurança.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Emissão ATPV-e</li>
+                        <li><i class="fas fa-check-circle"></i> Comunicado de Venda</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h3>Débitos e Multas</h3>
+                    <p style="margin-bottom: 20px;">Levantamento completo de débitos e parcelamento facilitado.</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> IPVA Atrasado</li>
+                        <li><i class="fas fa-check-circle"></i> Parcelamento em 12x</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE A EMPRESA -->
+    <section class="section-padding about-section" id="about" style="background: white;">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-images">
+                    <!-- Imagem Escritório -->
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1469&auto=format&fit=crop" alt="Escritório" class="img-main">
+                    <!-- Imagem Chave -->
+                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop" alt="Carro na estrada" class="img-float" style="object-fit: cover; height: 200px;">
+                </div>
+                
+                <div class="about-text">
+                    <span style="color: var(--accent); font-weight: 700; text-transform: uppercase;">Quem Somos</span>
+                    <h2>Eficiência e Confiança</h2>
+                    <p style="margin-bottom: 20px;">Não somos apenas um despachante, somos seus parceiros. Com anos de experiência, nossa missão é desmistificar a burocracia do trânsito brasileiro.</p>
+                    <p style="margin-bottom: 30px;">Temos acesso direto aos sistemas do Detran para garantir aprovação rápida.</p>
+                    
+                    <ul class="check-list">
+                        <li><i class="fas fa-check"></i> Atendimento personalizado via WhatsApp</li>
+                        <li><i class="fas fa-check"></i> Profissionais especializados</li>
+                        <li><i class="fas fa-check"></i> Transparência nos valores</li>
+                    </ul>
+
+                    <a href="https://wa.me/5511999999999" class="btn btn-primary" style="margin-top: 30px;">Falar com Especialista</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA PARCELAMENTO -->
+    <section class="cta-parallax">
+        <div class="container">
+            <h2>O orçamento apertou?</h2>
+            <p style="font-size: 1.2rem; margin-top: 15px;">Não corra riscos. Parcelamos IPVA, Multas e Licenciamento no cartão de crédito.</p>
+            
+            <div class="brands">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-amex"></i>
+            </div>
+            
+            <a href="https://wa.me/5511999999999" class="btn btn-primary" style="background: white; color: var(--primary);">
+                Simular Parcelamento Agora
+            </a>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-padding" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Dúvidas Frequentes</h2>
+            </div>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item">
+                    <div class="faq-header">
+                        Preciso ir até o escritório?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-body">
+                        <p>Não! Hoje, 95% dos nossos serviços são 100% online. Você envia fotos pelo WhatsApp e recebe o documento digital no celular.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        Quanto tempo demora o Licenciamento?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-body">
+                        <p>Após a confirmação do pagamento e se não houver bloqueios judiciais, emitimos o documento geralmente no mesmo dia útil.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        É seguro pagar online?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-body">
+                        <p>Totalmente. Somos uma empresa credenciada com CNPJ e escritório físico. Utilizamos plataformas de pagamento seguras e emitimos nota fiscal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">Despachante<span>Elite</span></a>
+                    <p>Simplificando a vida do motorista brasileiro com tecnologia e agilidade.</p>
+                    <div style="margin-top: 20px; display: flex; gap: 15px;">
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#about">Sobre Nós</a></li>
+                        <li><a href="#faq">Ajuda</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><i class="fas fa-phone-alt" style="margin-right: 10px; color: var(--accent);"></i> (11) 99999-9999</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 10px; color: var(--accent);"></i> contato@elite.com.br</li>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 10px; color: var(--accent);"></i> Av. Paulista, 1000 - SP</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; font-size: 0.9rem; opacity: 0.7;">
+                &copy; 2024 Despachante Elite. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/5511999999999" target="_blank" class="whatsapp-float">
+        <div class="pulse"></div>
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- SCRIPTS -->
+    <script>
+        // MENU MOBILE
+        const menuBtn = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        const icon = menuBtn.querySelector('i');
+
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            if (navMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                icon.style.color = 'var(--primary)';
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                icon.style.color = 'white';
+            }
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // HEADER SCROLL
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // FAQ ACCORDION
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const header = item.querySelector('.faq-header');
+            header.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
