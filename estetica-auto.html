@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Auto Spa | Estética Automotiva Premium</title>
+    <!-- Fontes Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- Ícones FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        body { background-color: #0f0f0f; color: #fff; overflow-x: hidden; }
+        
+        /* --- CORES & VARIAVEIS --- */
+        :root {
+            --primary: #ff5e00; 
+            --primary-dark: #cc4b00;
+            --dark: #050505;
+            --gray: #1a1a1a;
+            --light: #f4f4f4;
+            --text-gray: #b0b0b0;
+        }
+
+        /* --- UI ELEMENTS --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 16px 45px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-transform: uppercase;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(255, 94, 0, 0.3);
+            border: none;
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .btn:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 0 30px rgba(255, 94, 0, 0.6); }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            box-shadow: none;
+        }
+        .btn-outline:hover { background: var(--primary); color: #fff; }
+
+        .section-padding { padding: 100px 0; }
+
+        /* --- HEADER --- */
+        header {
+            background: rgba(5, 5, 5, 0.95);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 94, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+        
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        .phone-cta { font-weight: 700; color: var(--light); display: flex; align-items: center; gap: 10px; background: #222; padding: 8px 20px; border-radius: 50px; border: 1px solid #333; font-size: 0.9rem; }
+        .phone-cta i { color: var(--primary); }
+
+        /* --- MENU HAMBURGUER ICON (Default: Hidden) --- */
+        .mobile-menu-btn { display: none; font-size: 1.5rem; color: #fff; cursor: pointer; margin-left: auto; margin-right: 15px; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh; 
+            padding-top: 80px; 
+            background: linear-gradient(to right, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .hero-content { max-width: 700px; width: 100%; }
+        .hero-tag { color: var(--primary); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block; font-size: 0.9rem; }
+        .hero-content h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 25px;
+            font-weight: 900;
+        }
+        .hero-content p { font-size: 1.2rem; margin-bottom: 40px; color: #ccc; line-height: 1.6; max-width: 500px; }
+        .hero-btns { display: flex; gap: 20px; flex-wrap: wrap; }
+        
+        /* --- ESTATÍSTICAS --- */
+        .stats-bar { background: var(--primary); padding: 40px 0; margin-top: -5px; position: relative; z-index: 2; }
+        .stats-grid { display: flex; justify-content: space-around; text-align: center; color: #000; flex-wrap: wrap; gap: 30px; }
+        .stat-item h3 { font-size: 2.5rem; font-weight: 900; }
+        .stat-item p { font-weight: 700; text-transform: uppercase; font-size: 0.9rem; }
+
+        /* --- SERVIÇOS --- */
+        .services { background: var(--gray); }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.8rem; text-transform: uppercase; color: #fff; margin-bottom: 10px; font-weight: 900; }
+        .section-title h2 span { color: var(--primary); }
+        .section-title p { color: var(--text-gray); max-width: 600px; margin: 0 auto; padding: 0 10px; }
+
+        /* Grid Padrão (PC) */
+        .grid-services { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card {
+            background: #222;
+            padding: 40px 25px;
+            border-radius: 8px;
+            transition: 0.4s;
+            border: 1px solid #333;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--primary); transform: scaleX(0); transform-origin: left; transition: 0.4s;
+        }
+        .card:hover { transform: translateY(-10px); background: #2a2a2a; border-color: var(--primary); }
+        .card:hover::before { transform: scaleX(1); }
+        
+        .card-icon { font-size: 45px; color: var(--primary); margin-bottom: 25px; }
+        .card h3 { margin-bottom: 15px; font-size: 1.4rem; font-weight: 700; }
+        .card p { color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; }
+        .card-link { color: #fff; text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
+        .card-link:hover { gap: 10px; color: var(--primary); transition: 0.3s; }
+
+        /* --- GALERIA --- */
+        .gallery { background: var(--dark); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        .gallery-item { height: 300px; overflow: hidden; position: relative; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; filter: grayscale(30%); }
+        .gallery-item:hover img { transform: scale(1.1); filter: grayscale(0%); }
+        .overlay {
+            position: absolute; bottom: -100%; left: 0; width: 100%; padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            transition: 0.4s;
+        }
+        .gallery-item:hover .overlay { bottom: 0; }
+        .overlay h4 { font-size: 1.2rem; color: #fff; margin-bottom: 5px; }
+        .overlay p { color: var(--primary); font-size: 0.9rem; font-weight: 700; }
+
+        /* --- DIFERENCIAIS --- */
+        .features { background: #111; border-top: 1px solid #222; border-bottom: 1px solid #222; }
+        .features-container { display: flex; flex-wrap: wrap; align-items: center; gap: 50px; }
+        .features-text { flex: 1; min-width: 300px; }
+        .features-img { flex: 1; min-width: 300px; height: 500px; border-radius: 8px; overflow: hidden; position: relative; }
+        .features-img img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .feature-list { list-style: none; margin-top: 30px; }
+        .feature-list li { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; }
+        .feature-list i { color: var(--primary); font-size: 1.2rem; margin-top: 5px; }
+        .feature-list h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .feature-list p { color: var(--text-gray); font-size: 0.9rem; }
+
+        /* --- DEPOIMENTOS --- */
+        .testimonials { background: var(--dark); text-align: center; }
+        /* Flexbox padrão para PC */
+        .testi-grid { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+        .testi-card { background: #1a1a1a; padding: 30px; border-radius: 10px; width: 100%; max-width: 350px; text-align: left; border: 1px solid #333; }
+        .stars { color: #ffd700; margin-bottom: 15px; font-size: 0.9rem; }
+        .testi-text { font-style: italic; color: #ccc; margin-bottom: 20px; line-height: 1.6; }
+        .client-info { display: flex; align-items: center; gap: 15px; }
+        .client-img { width: 50px; height: 50px; background: #333; border-radius: 50%; object-fit: cover; }
+        .client-name h5 { color: #fff; font-size: 1rem; }
+        .client-name span { color: var(--primary); font-size: 0.8rem; font-weight: 700; }
+
+        /* --- FAQ --- */
+        .faq { background: var(--gray); }
+        .faq-item { background: #222; border-bottom: 1px solid #333; padding: 20px; margin-bottom: 15px; border-radius: 5px; cursor: pointer; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 1.1rem; }
+        .faq-question i { color: var(--primary); }
+
+        /* --- CTA FINAL --- */
+        .cta-section {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            text-align: center;
+            border-top: 2px solid var(--primary);
+        }
+        
+        /* --- FOOTER --- */
+        footer { background: #050505; padding: 60px 0 20px; border-top: 1px solid #222; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: #fff; margin-bottom: 20px; font-size: 1.2rem; border-left: 3px solid var(--primary); padding-left: 10px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #888; text-decoration: none; transition: 0.3s; }
+        .footer-col ul li a:hover { color: var(--primary); padding-left: 5px; }
+        .footer-info p { color: #888; margin-bottom: 10px; display: flex; gap: 10px; align-items: center; }
+        .copyright { text-align: center; color: #555; font-size: 0.8rem; padding-top: 20px; border-top: 1px solid #1a1a1a; }
+
+        /* --- WHATSAPP FLOATING --- */
+        .float-wap {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 2000;
+            text-decoration: none;
+            color: #fff;
+            transition: 0.3s;
+        }
+        .float-wap:hover { transform: scale(1.1); }
+        .pulse-ring {
+            position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 2px solid #25d366;
+            animation: pulse 2s infinite; opacity: 0;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* --- RESPONSIVIDADE (MOBILE AJUSTADO + MENU) --- */
+        @media (max-width: 991px) {
+            .hero-content h1 { font-size: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            /* Header Mobile */
+            .nav-flex { flex-wrap: wrap; }
+            .mobile-menu-btn { display: block; } /* Mostra o botão hamburguer */
+            
+            /* Menu Slide-in */
+            .nav-links { 
+                position: fixed;
+                top: 70px; /* Altura aproximada do header */
+                right: -100%; /* Começa escondido à direita */
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(5, 5, 5, 0.98);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s ease-in-out;
+                display: flex;
+                backdrop-filter: blur(10px);
+                border-top: 1px solid #333;
+                gap: 40px;
+            }
+            .nav-links.active { right: 0; /* Desliza para dentro */ }
+            .nav-links a { font-size: 1.5rem; }
+
+            .logo { font-size: 20px; }
+            
+            /* Hero Mobile */
+            .hero { padding-top: 100px; text-align: center; }
+            .hero-content { padding: 0 10px; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-btns { justify-content: center; width: 100%; }
+            .btn { width: 100%; padding: 15px 20px; font-size: 0.9rem; }
+            
+            /* Ajustes Gerais */
+            .section-padding { padding: 50px 0; }
+            .section-title h2 { font-size: 2rem; }
+            
+            /* -- SERVIÇOS (2 por linha) -- */
+            .grid-services { 
+                grid-template-columns: 1fr 1fr; /* Força 2 colunas */
+                gap: 10px; 
+            }
+            .card { 
+                padding: 15px 10px; /* Card compacto */
+            }
+            .card-icon { font-size: 25px; margin-bottom: 10px; }
+            .card h3 { font-size: 0.85rem; margin-bottom: 8px; line-height: 1.2; }
+            .card p { font-size: 0.6rem; margin-bottom: 10px; line-height: 1.3; } /* Texto reduzido */
+            .card-link { font-size: 0.7rem; }
+
+            /* -- GALERIA (2 por linha) -- */
+            .gallery-grid { 
+                grid-template-columns: 1fr 1fr; /* Força 2 colunas */
+                gap: 8px; 
+            } 
+            .gallery-item { height: 140px; } /* Foto mais baixa */
+            .overlay { padding: 10px; }
+            .overlay h4 { font-size: 0.8rem; }
+            .overlay p { font-size: 0.7rem; }
+            
+            /* -- DEPOIMENTOS (3 por linha - EXTREMO) -- */
+            .testi-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr; /* Força 3 colunas */
+                gap: 5px;
+            }
+            .testi-card {
+                padding: 10px 5px;
+                max-width: none;
+                border-radius: 5px;
+            }
+            .stars { font-size: 0.5rem; margin-bottom: 5px; }
+            .testi-text { 
+                font-size: 0.5rem; /* Fonte micro para caber */
+                line-height: 1.2; 
+                margin-bottom: 10px; 
+                height: 60px; /* Altura fixa p/ alinhar */
+                overflow: hidden;
+            }
+            .client-info { flex-direction: column; text-align: center; gap: 5px; }
+            .client-img { width: 30px; height: 30px; }
+            .client-name h5 { font-size: 0.6rem; }
+            .client-name span { display: none; } /* Ocultar cargo p/ economizar espaço */
+
+            /* Features */
+            .features-container { flex-direction: column; }
+            .features-img { height: 250px; width: 100%; margin-bottom: 20px; }
+            .features-text { text-align: left; }
+            
+            /* FAQ */
+            .faq-question { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-flex">
+            <div class="logo">ELITE<span>AUTO</span></div>
+            
+            <!-- Mobile Menu Button -->
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#inicio" onclick="toggleMenu()">Início</a>
+                <a href="#servicos" onclick="toggleMenu()">Serviços</a>
+                <a href="#galeria" onclick="toggleMenu()">Galeria</a>
+                <a href="#sobre" onclick="toggleMenu()">Sobre</a>
+            </nav>
+            <a href="#" class="phone-cta">
+                <i class="fas fa-phone-alt"></i> (XX) 99999-9999
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+        <div class="container hero-content">
+            <span class="hero-tag">Estética Automotiva Premium</span>
+            <h1>Seu Carro Novo,<br><span style="color:var(--primary)">De Novo.</span></h1>
+            <p>Especialistas em detalhamento automotivo, vitrificação e proteção de pintura. O cuidado que sua máquina merece com tecnologia de ponta.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn">Solicitar Orçamento</a>
+                <a href="#servicos" class="btn btn-outline">Ver Serviços</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="container stats-grid">
+            <div class="stat-item">
+                <h3>+1.500</h3>
+                <p>Carros Atendidos</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>Clientes Satisfeitos</p>
+            </div>
+            <div class="stat-item">
+                <h3>10x</h3>
+                <p>Mais Proteção</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Serviços -->
+    <section class="services section-padding" id="servicos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossas <span>Soluções</span></h2>
+                <p>Combinamos técnicas artesanais com os melhores produtos do mercado mundial.</p>
+            </div>
+            <div class="grid-services">
+                <!-- Serviço 1 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-hammer"></i></div>
+                    <h3>Martelinho de Ouro</h3>
+                    <p>Técnica artesanal para remover amassados sem danificar a pintura original.</p>
+                    <a href="#" class="card-link">Ver <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Serviço 2 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-gem"></i></div>
+                    <h3>Vitrificação 9H</h3>
+                    <p>Revestimento cerâmico de alta dureza. Proteção contra riscos por 3 anos.</p>
+                    <a href="#" class="card-link">Ver <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Serviço 3 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-spray-can"></i></div>
+                    <h3>Polimento Técnico</h3>
+                    <p>Correção de verniz em múltiplas etapas. Brilho espelhado.</p>
+                    <a href="#" class="card-link">Ver <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Serviço 4 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-soap"></i></div>
+                    <h3>Higienização</h3>
+                    <p>Limpeza profunda de bancos, teto e carpete com máquinas.</p>
+                    <a href="#" class="card-link">Ver <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Serviço 5 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-car-burst"></i></div>
+                    <h3>PPF (Proteção)</h3>
+                    <p>Película de proteção de pintura regenerativa contra pedras.</p>
+                    <a href="#" class="card-link">Ver <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <!-- Serviço 6 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-motorcycle"></i></div>
+                    <h3>Detalhamento Moto</h3>
+                    <p>Tratamento específico para motos, limpeza de motor e plásticos.</p>
+                    <a href="#" class="card-link">Ver <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section class="gallery section-padding" id="galeria">
+        <div class="container">
+            <div class="section-title">
+                <h2>Galeria de <span>Resultados</span></h2>
+                <p>Confira o padrão de acabamento que entregamos.</p>
+            </div>
+            <div class="gallery-grid">
+                <!-- Foto 1: Polimento Porsche -->
+                <div class="gallery-item">
+                    <img src="https://static.wixstatic.com/media/092b19_f9d49067fe8b4138aabffc40cb9daecf~mv2.png/v1/fill/w_794,h_458,fp_0.20_0.44,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_6088%20(1)_heic.png" alt="Polimento Porsche">
+                    <div class="overlay">
+                        <h4>Polimento</h4>
+                        <p>Correção</p>
+                    </div>
+                </div>
+                <!-- Foto 2 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?q=80&w=800&auto=format&fit=crop" alt="Motor Detalhado">
+                    <div class="overlay">
+                        <h4>Motor</h4>
+                        <p>Limpeza</p>
+                    </div>
+                </div>
+                <!-- Foto 3: Higienização Couro -->
+                <div class="gallery-item">
+                    <img src="https://www.autodisk.com.br/wp-content/uploads/2022/10/hidratacao-banco.jpg" alt="Interior Luxo">
+                    <div class="overlay">
+                        <h4>Couro</h4>
+                        <p>Hidratação</p>
+                    </div>
+                </div>
+                <!-- Foto 4 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=800&auto=format&fit=crop" alt="Mustang">
+                    <div class="overlay">
+                        <h4>Vitrificação</h4>
+                        <p>Ceramic 9H</p>
+                    </div>
+                </div>
+                <!-- Foto 5 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&auto=format&fit=crop" alt="Carro Preto">
+                    <div class="overlay">
+                        <h4>Espelhamento</h4>
+                        <p>Brilho</p>
+                    </div>
+                </div>
+                <!-- Foto 6: Roda Detalhe -->
+                <div class="gallery-item">
+                    <img src="https://static.wixstatic.com/media/67b942_ad95aaf69bb9477ca5ec3e4995ed0376~mv2.jpg/v1/fill/w_708,h_610,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/67b942_ad95aaf69bb9477ca5ec3e4995ed0376~mv2.jpg" alt="Roda Detalhe">
+                    <div class="overlay">
+                        <h4>Rodas</h4>
+                        <p>Limpeza</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre / Diferenciais -->
+    <section class="features section-padding" id="sobre">
+        <div class="container features-container">
+            <div class="features-img">
+                <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?q=80&w=800&auto=format&fit=crop" alt="Oficina Detalhe">
+                <div style="position:absolute; top:20px; right:20px; background:var(--primary); padding:10px; font-weight:bold;">DESDE 2018</div>
+            </div>
+            <div class="features-text">
+                <h4 style="color:var(--primary); text-transform:uppercase; letter-spacing:2px; margin-bottom:10px;">Sobre Nós</h4>
+                <h2 style="font-size:2.5rem; margin-bottom:20px;">Por que somos a referência em <span style="color:var(--primary)">detalhamento?</span></h2>
+                <p style="color:#ccc; line-height:1.6; margin-bottom:30px;">Não somos apenas um lava-rápido. Somos um estúdio de estética automotiva focado em restaurar a originalidade e proteger seu patrimônio. Tratamos cada veículo como se fosse único.</p>
+                
+                <ul class="feature-list">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Produtos Importados</h4>
+                            <p>Utilizamos apenas compostos alemães e americanos (Menzerna, Meguiar's).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Equipe Certificada</h4>
+                            <p>Profissionais com cursos de especialização em polimento e proteção.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>Ambiente Controlado</h4>
+                            <p>Estúdio com iluminação específica para inspeção de pintura.</p>
+                        </div>
+                    </li>
+                </ul>
+                <a href="#" class="btn">Conhecer o Estúdio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="testimonials section-padding">
+        <div class="container">
+            <div class="section-title">
+                <h2>O que dizem <span>nossos clientes</span></h2>
+            </div>
+            <div class="testi-grid">
+                <div class="testi-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testi-text">"Levei minha BMW para vitrificação. Resultado surreal. Atendimento 10."</p>
+                    <div class="client-info">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente" class="client-img">
+                        <div class="client-name"><h5>Carlos Eduardo</h5><span>Empresário</span></div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testi-text">"O martelinho de ouro salvou a porta. Nem parece que tinha amassado."</p>
+                    <div class="client-info">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente" class="client-img">
+                        <div class="client-name"><h5>Fernanda Lima</h5><span>Médica</span></div>
+                    </div>
+                </div>
+                <div class="testi-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testi-text">"Preço justo pela qualidade. Higienização deixou cheiro de novo."</p>
+                    <div class="client-info">
+                        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Cliente" class="client-img">
+                        <div class="client-name"><h5>Ricardo Santos</h5><span>Advogado</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq section-padding">
+        <div class="container" style="max-width: 800px;">
+            <div class="section-title">
+                <h2>Perguntas <span>Frequentes</span></h2>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Quanto tempo demora a vitrificação? <i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">O martelinho de ouro precisa pintar? <i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Vocês buscam o carro em casa (Leva e Traz)? <i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Aceitam cartão de crédito? <i class="fas fa-plus"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="color: #fff; margin-bottom: 20px; font-size: 2.5rem;">Seu carro merece tratamento VIP</h2>
+            <p style="color: #ccc; margin-bottom: 30px; font-size: 1.2rem;">Agende uma avaliação gratuita pelo WhatsApp e ganhe a cristalização dos vidros.</p>
+            <a href="#" class="btn"><i class="fab fa-whatsapp"></i> Agendar Agora</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>ELITE AUTO</h4>
+                    <p style="color:#888; font-size:0.9rem;">Elevando o nível da estética automotiva na cidade. Qualidade, confiança e brilho.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#galeria">Galeria</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <div class="footer-info">
+                        <p><i class="fas fa-map-marker-alt" style="color:var(--primary)"></i> Av. Principal, 1000 - Centro</p>
+                        <p><i class="fas fa-phone" style="color:var(--primary)"></i> (XX) 9999-9999</p>
+                        <p><i class="fas fa-envelope" style="color:var(--primary)"></i> contato@eliteauto.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Elite Auto Spa. Todos os direitos reservados. Design por <strong>Sua Agência</strong>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Whatsapp Flutuante -->
+    <a href="#" class="float-wap">
+        <div class="pulse-ring"></div>
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- SCRIPT DO MENU MOBILE -->
+    <script>
+        function toggleMenu() {
+            const nav = document.querySelector('.nav-links');
+            const btnIcon = document.querySelector('.mobile-menu-btn i');
+            
+            nav.classList.toggle('active');
+            
+            // Troca ícone (Bars <-> Times)
+            if(nav.classList.contains('active')) {
+                btnIcon.classList.remove('fa-bars');
+                btnIcon.classList.add('fa-times');
+            } else {
+                btnIcon.classList.remove('fa-times');
+                btnIcon.classList.add('fa-bars');
+            }
+        }
+    </script>
+
+</body>
+</html>

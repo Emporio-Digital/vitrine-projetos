@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière Estética Avançada | Harmonização Facial</title>
+    <!-- Fontes Google: Playfair Display (Luxo) e Montserrat (Leitura) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Ícones FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { 
+            background-color: #ffffff; 
+            color: #4a4a4a; 
+            font-family: 'Montserrat', sans-serif; 
+            overflow-x: hidden; 
+        }
+        
+        /* --- CORES & VARIAVEIS --- */
+        :root {
+            --gold: #d4af37; /* Dourado Clássico */
+            --gold-light: #f3e5ab;
+            --nude: #fdfbf7; /* Fundo creme bem suave */
+            --dark: #222222;
+            --text-light: #666666;
+            --font-title: 'Playfair Display', serif;
+        }
+
+        /* --- UI ELEMENTS --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #d4af37, #b48811);
+            color: #fff;
+            padding: 16px 45px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: 0.5s;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn:hover { background: linear-gradient(45deg, #b48811, #d4af37); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+        }
+        .btn-outline:hover { background: var(--gold); color: #fff; }
+
+        .section-padding { padding: 100px 0; }
+        
+        /* Títulos Elegantes */
+        h1, h2, h3, h4 { font-family: var(--font-title); color: var(--dark); }
+
+        /* --- HEADER --- */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo { font-size: 28px; font-family: var(--font-title); font-weight: 700; color: var(--dark); letter-spacing: 1px; }
+        .logo span { color: var(--gold); font-style: italic; }
+        
+        /* Menu Desktop */
+        .nav-links { display: flex; gap: 35px; }
+        .nav-links a { color: var(--dark); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* Botão Mobile (Hambúrguer) - Escondido no PC */
+        .mobile-btn { display: none; font-size: 1.5rem; color: var(--gold); cursor: pointer; }
+
+        /* Menu Mobile (Drawer) */
+        .mobile-menu {
+            display: none; /* Escondido por padrão */
+            position: absolute;
+            top: 100%; /* Logo abaixo do header */
+            left: 0;
+            width: 100%;
+            background: #fff;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--gold);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .mobile-menu a {
+            display: block;
+            padding: 15px;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .mobile-menu a:hover { color: var(--gold); background: var(--nude); }
+
+        /* Classe que o JS vai adicionar para mostrar o menu */
+        .mobile-menu.active { display: flex; animation: slideDown 0.3s ease; }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .phone-cta { color: var(--gold); font-weight: 600; display: flex; align-items: center; gap: 10px; border: 1px solid var(--gold-light); padding: 8px 20px; border-radius: 50px; font-size: 0.9rem; text-decoration: none; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            padding-top: 80px;
+            background: url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1920&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center top;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+        }
+
+        .hero-content { max-width: 600px; width: 100%; position: relative; z-index: 2; padding-left: 5%; }
+        .hero-tag { color: var(--gold); font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; display: block; font-size: 0.9rem; }
+        .hero-content h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            font-weight: 400; 
+        }
+        .hero-content h1 span { font-style: italic; color: var(--gold); }
+        .hero-content p { font-size: 1.1rem; margin-bottom: 40px; color: var(--text-light); line-height: 1.8; max-width: 450px; }
+        .hero-btns { display: flex; gap: 20px; }
+        
+        /* --- ESTATÍSTICAS (Gold Bar) --- */
+        .stats-bar { background: linear-gradient(to right, #d4af37, #eacda3); padding: 35px 0; }
+        .stats-grid { display: flex; justify-content: space-around; text-align: center; color: #fff; flex-wrap: wrap; gap: 30px; }
+        .stat-item h3 { font-size: 2.5rem; font-weight: 400; font-family: var(--font-title); color: #fff; }
+        .stat-item p { font-weight: 400; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+
+        /* --- SERVIÇOS --- */
+        .services { background: var(--nude); }
+        .section-title { text-align: center; margin-bottom: 70px; }
+        .section-title h2 { font-size: 3rem; margin-bottom: 15px; font-weight: 400; }
+        .section-title span { color: var(--gold); font-style: italic; }
+        .section-title p { color: var(--text-light); max-width: 600px; margin: 0 auto; padding: 0 10px; font-size: 1rem; }
+
+        .grid-services { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card {
+            background: #fff;
+            padding: 50px 30px;
+            text-align: center;
+            transition: 0.4s;
+            border: 1px solid #f0f0f0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15); }
+        
+        .card-icon { font-size: 40px; color: var(--gold); margin-bottom: 25px; }
+        .card h3 { margin-bottom: 15px; font-size: 1.5rem; font-weight: 400; }
+        .card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; margin-bottom: 25px; }
+        .card-link { color: var(--dark); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+
+        /* --- GALERIA (Clean) --- */
+        .gallery { background: #fff; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .gallery-item { height: 350px; overflow: hidden; position: relative; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.7s; }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .overlay {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px;
+            background: linear-gradient(to top, rgba(212, 175, 55, 0.9), transparent);
+            opacity: 0; transition: 0.4s;
+        }
+        .gallery-item:hover .overlay { opacity: 1; }
+        .overlay h4 { font-size: 1.2rem; color: #fff; margin-bottom: 5px; font-family: var(--font-title); }
+        .overlay p { color: #fff; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- SOBRE (Features) --- */
+        .features { background: var(--nude); }
+        .features-container { display: flex; flex-wrap: wrap; align-items: center; gap: 60px; }
+        .features-img { flex: 1; min-width: 300px; height: 550px; position: relative; }
+        .features-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 5px 50px 5px 50px; }
+        .features-img::before {
+            content: ''; position: absolute; bottom: -20px; left: -20px; width: 200px; height: 200px;
+            border-left: 5px solid var(--gold); border-bottom: 5px solid var(--gold); z-index: 1;
+        }
+
+        .features-text { flex: 1; min-width: 300px; }
+        .features-text h4 { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; font-size: 0.9rem; font-family: 'Montserrat', sans-serif; }
+        .features-text h2 { font-size: 3rem; margin-bottom: 25px; line-height: 1.2; }
+        .features-text p { color: var(--text-light); line-height: 1.8; margin-bottom: 30px; font-size: 1.05rem; }
+        
+        .feature-list { list-style: none; }
+        .feature-list li { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 25px; }
+        .feature-list i { color: var(--gold); font-size: 1.2rem; margin-top: 5px; background: #fff; padding: 10px; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .feature-list h4 { color: var(--dark); font-size: 1.1rem; margin-bottom: 5px; font-family: var(--font-title); text-transform: none; letter-spacing: 0; }
+
+        /* --- DEPOIMENTOS --- */
+        .testimonials { background: #fff; text-align: center; }
+        .testi-grid { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; }
+        .testi-card { background: var(--nude); padding: 40px; border: 1px solid #f3e5ab; width: 100%; max-width: 350px; text-align: center; transition: 0.3s; }
+        .testi-card:hover { background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .quote-icon { font-size: 30px; color: var(--gold-light); margin-bottom: 20px; }
+        .testi-text { font-style: italic; color: #555; margin-bottom: 25px; line-height: 1.6; font-family: var(--font-title); font-size: 1.1rem; }
+        .client-name h5 { color: var(--dark); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
+
+        /* --- FAQ --- */
+        .faq { background: var(--nude); }
+        .faq-item { background: #fff; border: 1px solid #eee; padding: 25px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
+        .faq-item:hover { border-color: var(--gold-light); }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; font-weight: 500; font-size: 1.1rem; color: var(--dark); }
+        .faq-question i { color: var(--gold); }
+
+        /* --- CTA FINAL --- */
+        .cta-section {
+            background: linear-gradient(rgba(34,34,34,0.7), rgba(34,34,34,0.7)), url('https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        /* --- FOOTER --- */
+        footer { background: #1a1a1a; padding: 60px 0 20px; color: #fff; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { color: var(--gold); margin-bottom: 25px; font-size: 1.2rem; font-family: var(--font-title); letter-spacing: 1px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 15px; }
+        .footer-col ul li a { color: #aaa; text-decoration: none; transition: 0.3s; font-size: 0.9rem; }
+        .footer-col ul li a:hover { color: var(--gold); }
+        .footer-info p { color: #aaa; margin-bottom: 15px; display: flex; gap: 15px; align-items: center; font-size: 0.9rem; }
+        .copyright { text-align: center; color: #555; font-size: 0.8rem; padding-top: 30px; border-top: 1px solid #333; }
+
+        /* --- WHATSAPP FLOATING --- */
+        .float-wap {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            z-index: 2000;
+            text-decoration: none;
+            color: #fff;
+            transition: 0.3s;
+        }
+        .float-wap:hover { transform: scale(1.1); }
+        .pulse-ring {
+            position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 2px solid #25d366;
+            animation: pulse 2s infinite; opacity: 0;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* --- RESPONSIVIDADE (MOBILE FIRST RULES) --- */
+        @media (max-width: 768px) {
+            /* Header */
+            .nav-flex { flex-direction: row; justify-content: space-between; gap: 0; }
+            .nav-links { display: none; } /* Esconde menu PC */
+            .mobile-btn { display: block; order: 3; } /* Mostra botão Menu */
+            .logo { font-size: 20px; order: 1; }
+            .phone-cta { font-size: 0.8rem; padding: 5px 12px; order: 2; margin-right: 15px; margin-left: auto; } /* Botão agendar no topo */
+            
+            /* Hero */
+            .hero { padding-top: 100px; text-align: center; background-position: center center; }
+            .hero-content { padding: 0 20px; max-width: 100%; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .hero-btns { justify-content: center; flex-direction: column; width: 100%; }
+            .btn { width: 100%; }
+
+            /* -- REGRAS ESPECÍFICAS MOBILE -- */
+            .grid-services { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .card { padding: 20px 10px; }
+            .card-icon { font-size: 25px; margin-bottom: 10px; }
+            .card h3 { font-size: 0.9rem; margin-bottom: 5px; line-height: 1.2; }
+            .card p { display: none; }
+            .card-link { font-size: 0.65rem; }
+
+            .gallery-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .gallery-item { height: 160px; }
+            .overlay { padding: 10px; }
+            .overlay h4 { font-size: 0.9rem; }
+            .overlay p { font-size: 0.6rem; }
+
+            .testi-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; }
+            .testi-card { padding: 10px 5px; border-radius: 4px; border: 1px solid #eee; }
+            .quote-icon { display: none; } 
+            .testi-text { font-size: 0.5rem; line-height: 1.2; margin-bottom: 5px; height: 50px; overflow: hidden; }
+            .client-name h5 { font-size: 0.55rem; }
+
+            .features-container { flex-direction: column; gap: 30px; }
+            .features-img { height: 300px; width: 100%; margin-top: 20px; order: -1; }
+            .features-text h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-flex">
+            <div class="logo">LUMIÈRE <span>Esthétique</span></div>
+            
+            <!-- Menu Desktop -->
+            <nav class="nav-links">
+                <a href="#inicio">Início</a>
+                <a href="#procedimentos">Procedimentos</a>
+                <a href="#clinica">A Clínica</a>
+                <a href="#depoimentos">Resultados</a>
+            </nav>
+
+            <a href="#" class="phone-cta">
+                <i class="fab fa-whatsapp"></i> Agendar
+            </a>
+
+            <!-- Botão Hamburguer (Mobile) -->
+            <div class="mobile-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+
+        <!-- Menu Drawer Mobile -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#inicio" onclick="toggleMenu()">Início</a>
+            <a href="#procedimentos" onclick="toggleMenu()">Procedimentos</a>
+            <a href="#clinica" onclick="toggleMenu()">A Clínica</a>
+            <a href="#depoimentos" onclick="toggleMenu()">Resultados</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+        <div class="container hero-content">
+            <span class="hero-tag">Estética Avançada & Harmonização</span>
+            <h1>Realce sua beleza <br><span>Natural</span> e Única.</h1>
+            <p>Protocolos exclusivos de rejuvenescimento facial. Unimos ciência, arte e tecnologia para resultados elegantes e sofisticados.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn">Agendar Avaliação</a>
+                <a href="#procedimentos" class="btn btn-outline">Conhecer</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar (Gold) -->
+    <div class="stats-bar">
+        <div class="container stats-grid">
+            <div class="stat-item">
+                <h3>+2.000</h3>
+                <p>Procedimentos Realizados</p>
+            </div>
+            <div class="stat-item">
+                <h3>5 Estrelas</h3>
+                <p>Avaliação Google</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>Segurança Clínica</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Procedimentos -->
+    <section class="services section-padding" id="procedimentos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nossos <span>Protocolos</span></h2>
+                <p>Tratamentos minimamente invasivos com recuperação rápida.</p>
+            </div>
+            <div class="grid-services">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-syringe"></i></div>
+                    <h3>Harmonização</h3>
+                    <p>Conjunto de procedimentos para equilibrar os traços do rosto (Malar, Mandíbula e Mento).</p>
+                    <a href="#" class="card-link">Saiba Mais</a>
+                </div>
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-magic"></i></div>
+                    <h3>Toxina Botulínica</h3>
+                    <p>Prevenção e tratamento de rugas dinâmicas. Aparência descansada e jovial.</p>
+                    <a href="#" class="card-link">Saiba Mais</a>
+                </div>
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="card-icon"><i class="far fa-kiss-wink-heart"></i></div>
+                    <h3>Preenchimento Labial</h3>
+                    <p>Volume, contorno e hidratação para lábios desenhados e sensuais na medida certa.</p>
+                    <a href="#" class="card-link">Saiba Mais</a>
+                </div>
+                <!-- Card 4 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-feather-alt"></i></div>
+                    <h3>Bioestimuladores</h3>
+                    <p>Estímulo intenso de colágeno (Sculptra, Radiesse) para combater a flacidez.</p>
+                    <a href="#" class="card-link">Saiba Mais</a>
+                </div>
+                <!-- Card 5 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-infinity"></i></div>
+                    <h3>Fios de Sustentação</h3>
+                    <p>Efeito lifting imediato sem cirurgia. Reposicionamento dos tecidos da face.</p>
+                    <a href="#" class="card-link">Saiba Mais</a>
+                </div>
+                <!-- Card 6 -->
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-spa"></i></div>
+                    <h3>Skinbooster</h3>
+                    <p>Hidratação profunda injetável que devolve o viço e o brilho "Glow" para a pele.</p>
+                    <a href="#" class="card-link">Saiba Mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria (Clean) -->
+    <section class="gallery section-padding" id="galeria">
+        <div class="container">
+            <div class="section-title">
+                <h2>Galeria de <span>Resultados</span></h2>
+                <p>Transformações reais, preservando a identidade de cada paciente.</p>
+            </div>
+            <div class="gallery-grid">
+                <!-- Foto 1 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=800&auto=format&fit=crop" alt="Rosto Feminino">
+                    <div class="overlay">
+                        <h4>Full Face</h4>
+                        <p>Reestruturação</p>
+                    </div>
+                </div>
+                <!-- Foto 2 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=800&auto=format&fit=crop" alt="Labios">
+                    <div class="overlay">
+                        <h4>Labial</h4>
+                        <p>Hidratação e Volume</p>
+                    </div>
+                </div>
+                <!-- Foto 3: IMAGEM NOVA -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1552693673-1bf958298935?q=80&w=800&auto=format&fit=crop" alt="Pele Glow">
+                    <div class="overlay">
+                        <h4>Pele Glow</h4>
+                        <p>Bioestimulador</p>
+                    </div>
+                </div>
+                <!-- Foto 4 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop" alt="Perfil">
+                    <div class="overlay">
+                        <h4>Rinomodelação</h4>
+                        <p>Perfiloplastia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- A Clinica (Features) -->
+    <section class="features section-padding" id="clinica">
+        <div class="container features-container">
+            <div class="features-img">
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=800&auto=format&fit=crop" alt="Dra. Aplicando">
+            </div>
+            <div class="features-text">
+                <h4>Excelência e Segurança</h4>
+                <h2>Por que escolher a <br><span>Lumière?</span></h2>
+                <p>Entendemos que cada rosto é uma obra de arte única. Nossa abordagem foge dos padrões exagerados, focando em devolver a jovialidade que você merece com total naturalidade.</p>
+                
+                <ul class="feature-list">
+                    <li>
+                        <i class="fas fa-user-md"></i>
+                        <div>
+                            <h4>Especialistas Qualificados</h4>
+                            <p>Equipe biomédica com pós-graduação internacional.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-check-double"></i>
+                        <div>
+                            <h4>Produtos Premium</h4>
+                            <p>Trabalhamos apenas com Allergan, Galderma e Merz.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-heart"></i>
+                        <div>
+                            <h4>Atendimento Humanizado</h4>
+                            <p>Acompanhamento completo do pré ao pós-procedimento.</p>
+                        </div>
+                    </li>
+                </ul>
+                <a href="#" class="btn">Agendar Consultoria</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="testimonials section-padding" id="depoimentos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Love <span>Stories</span></h2>
+            </div>
+            <div class="testi-grid">
+                <!-- Depoimento 1 -->
+                <div class="testi-card">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testi-text">"Minha autoestima mudou completamente após o preenchimento labial. Ficou super natural, ninguém diz que fiz algo."</p>
+                    <div class="client-name"><h5>Mariana S.</h5></div>
+                </div>
+                <!-- Depoimento 2 -->
+                <div class="testi-card">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testi-text">"A Dra. tem mãos de fada. O botox tirou meu ar de cansada sem me deixar congelada. Amei o resultado."</p>
+                    <div class="client-name"><h5>Carla B.</h5></div>
+                </div>
+                <!-- Depoimento 3 -->
+                <div class="testi-card">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testi-text">"Ambiente maravilhoso e atendimento impecável. Fiz os fios de sustentação e rejuvenesci 10 anos."</p>
+                    <div class="client-name"><h5>Patrícia L.</h5></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq section-padding">
+        <div class="container" style="max-width: 800px;">
+            <div class="section-title">
+                <h2>Dúvidas <span>Frequentes</span></h2>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">O preenchimento labial dói? <i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Quanto tempo dura o efeito do Botox? <i class="fas fa-plus"></i></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Quais as formas de pagamento? <i class="fas fa-plus"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="color: #fff; margin-bottom: 20px; font-size: 2.5rem; font-family: var(--font-title);">Sua melhor versão começa agora</h2>
+            <p style="color: #ddd; margin-bottom: 30px; font-size: 1.1rem;">Agende sua avaliação e descubra o poder da harmonização.</p>
+            <a href="#" class="btn"><i class="fab fa-whatsapp"></i> Falar com Especialista</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>LUMIÈRE</h4>
+                    <p>Clínica referência em Harmonização Orofacial e Estética Avançada.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Menu</h4>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#procedimentos">Procedimentos</a></li>
+                        <li><a href="#galeria">Galeria</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <div class="footer-info">
+                        <p><i class="fas fa-map-marker-alt" style="color:var(--gold)"></i> Edifício Diamond, Sala 402</p>
+                        <p><i class="fas fa-phone" style="color:var(--gold)"></i> (XX) 99999-9999</p>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Lumière Estética. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Whatsapp Flutuante -->
+    <a href="#" class="float-wap">
+        <div class="pulse-ring"></div>
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- SCRIPT DO MENU MOBILE -->
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
