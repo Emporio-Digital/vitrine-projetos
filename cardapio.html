@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GASTRO GRILL | Prime House</title>
+    
+    <!-- OTIMIZAÇÃO DE VELOCIDADE (PRELOAD) -->
+    <!-- Carrega o fundo e a carne principal instantaneamente -->
+    <link rel="preload" as="image" href="https://i.ibb.co/8nnLydqr/bar-pictures-9krzcvht86wvml7d.jpg">
+    <link rel="preload" as="image" href="https://i.ibb.co/S2CzHW9/depositphotos-159101120-stock-photo-freshly-grilled-tomahawk-steak.webp">
+    
+    <!-- Novas Fontes: Italiana (Logo Chique) e Manrope (Leitura) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Manrope:wght@300;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. CONFIGURAÇÕES GERAIS --- */
+        :root {
+            --neon-blue: #00f7ff;
+            --glass-bg: rgba(5, 15, 25, 0.75);
+            --glass-border: 1px solid rgba(0, 247, 255, 0.2);
+            --text-main: #ffffff;
+            --text-sec: #cccccc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            color: var(--text-main);
+            background-color: #000; /* Fundo preto enquanto a imagem carrega */
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        /* --- 2. FUNDO FIXO --- */
+        .bg-fixed {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://i.ibb.co/8nnLydqr/bar-pictures-9krzcvht86wvml7d.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+            /* Garante que o navegador priorize essa renderização */
+            will-change: transform; 
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        /* --- 3. CABEÇALHO & STATUS --- */
+        .status-bar {
+            background: rgba(0,0,0,0.9);
+            border-bottom: var(--glass-border);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+
+        /* A NOVA FONTE CHAMATIVA */
+        .logo {
+            font-family: 'Italiana', serif; /* Fonte de Luxo */
+            font-size: 3.8rem; /* Aumentei para destacar */
+            color: #fff;
+            text-shadow: 0 0 25px rgba(0, 247, 255, 0.6); /* Brilho mais forte */
+            line-height: 1;
+            margin-bottom: 10px;
+            letter-spacing: -2px; /* Deixa as letras juntinhas estilo Vogue */
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            letter-spacing: 6px; /* Espaçamento chique */
+            color: var(--text-sec);
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* --- 4. MARQUEE --- */
+        .marquee-wrap {
+            border-top: var(--glass-border);
+            border-bottom: var(--glass-border);
+            background: rgba(0, 20, 40, 0.6);
+            backdrop-filter: blur(8px);
+            padding: 12px 0;
+            margin-bottom: 30px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .marquee-text {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+            color: var(--neon-blue);
+            font-weight: 800;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        
+        .marquee-text span { margin: 0 30px; }
+
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- 5. GRID SYSTEM (MOBILE FIRST) --- */
+        .container {
+            width: 100%;
+            padding: 0 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        /* --- 6. CARDS --- */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 300px;
+            /* Placeholder cinza escuro enquanto a imagem carrega */
+            background-color: #1a1a1a; 
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0; left: 0;
+            transition: transform 0.6s ease;
+        }
+        
+        .card:active .card-img, .card:hover .card-img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 2;
+            margin-top: auto;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,1) 15%, rgba(0,0,0,0.5) 60%, transparent);
+            width: 100%;
+        }
+
+        .tag {
+            position: absolute;
+            top: 15px; right: 15px;
+            background: var(--neon-blue);
+            color: #000;
+            padding: 4px 10px;
+            font-weight: 800;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            border-radius: 4px;
+            z-index: 5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Títulos dos Pratos também com fonte elegante */
+        .card-title {
+            font-family: 'Italiana', serif; /* Mantendo consistência */
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 5px;
+            line-height: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            font-weight: 400; /* Italiana já é bold visualmente */
+        }
+
+        .desc {
+            font-size: 0.85rem;
+            color: #ddd;
+            margin-bottom: 10px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            color: var(--neon-blue);
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.4);
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* --- 7. DESKTOP (BENTO GRID) --- */
+        @media (min-width: 900px) {
+            .logo { font-size: 5rem; } /* Gigante no desktop */
+            
+            .grid-wrapper {
+                grid-template-columns: repeat(4, 1fr);
+                grid-auto-rows: 280px;
+                gap: 25px;
+            }
+
+            .span-hero { grid-column: span 2; grid-row: span 2; }
+            .span-vertical { grid-column: span 1; grid-row: span 2; }
+            .span-wide { grid-column: span 4; grid-row: span 1; }
+            .span-box { grid-column: span 1; grid-row: span 1; }
+            .span-double { grid-column: span 2; grid-row: span 1; }
+
+            .card-title { font-size: 2rem; }
+            
+            .card:hover { 
+                transform: translateY(-5px); 
+                box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 15px rgba(0, 247, 255, 0.3);
+                border-color: var(--neon-blue);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fundo -->
+    <div class="bg-fixed"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Status -->
+    <div class="status-bar">
+        <span><i class="fas fa-wifi"></i> GASTRO_GUEST</span>
+        <span>MESA 08</span>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">GASTRO GRILL</div>
+        <div class="subtitle">Prime House & Drinks</div>
+    </header>
+
+    <!-- Marquee -->
+    <div class="marquee-wrap">
+        <div class="marquee-text">
+            <span>✦ Wagyu A5 Disponível</span>
+            <span>✦ Experimente nossa Costela Royal</span>
+            <span>✦ Happy Hour: Drinks em dobro</span>
+            <span>✦ O melhor Churrasco do Jardins</span>
+        </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="container">
+        <div class="grid-wrapper">
+
+            <!-- 1. HERO: TOMAHAWK (Priority High para carregar primeiro) -->
+            <div class="card span-hero">
+                <span class="tag">Chef Recomenda</span>
+                <img src="https://i.ibb.co/S2CzHW9/depositphotos-159101120-stock-photo-freshly-grilled-tomahawk-steak.webp" class="card-img" alt="Tomahawk" fetchpriority="high">
+                <div class="card-content">
+                    <h2 class="card-title">Tomahawk Imperial</h2>
+                    <p class="desc">1.2kg de corte nobre com osso longo, grelhado na parrilha e finalizado com manteiga de ervas.</p>
+                    <div class="price">R$ 240,00</div>
+                </div>
+            </div>
+
+            <!-- 2. DRINK: SHOT FLAMBADO -->
+            <div class="card span-box">
+                <span class="tag">Show</span>
+                <img src="https://i.ibb.co/xqHp8vvS/HD-wallpaper-party-with-fire-cocktail-drinks-bar-glasses-beautiful-fire-cool-party-hot-thumbnail.jpg" class="card-img" alt="Fire Shot" loading="eager">
+                <div class="card-content">
+                    <h3 class="card-title">Shot Flambado</h3>
+                    <div class="price">R$ 35,00</div>
+                </div>
+            </div>
+
+            <!-- 3. ESPETO: KEBAB (Vertical) -->
+            <div class="card span-vertical">
+                <span class="tag">Premium</span>
+                <img src="https://i.ibb.co/Kc1nynxn/pngtree-highly-hyper-realistic-delicious-meat-shish-kebabs-image-16193277.jpg" class="card-img" alt="Espeto" loading="eager">
+                <div class="card-content">
+                    <h3 class="card-title">Espeto Angus Prime</h3>
+                    <p class="desc">Cubos de Angus e pimentões defumados.</p>
+                    <div class="price">R$ 32,00</div>
+                </div>
+            </div>
+
+            <!-- 4. NOVO: DRINK CAFÉ -->
+            <div class="card span-box">
+                <img src="https://i.ibb.co/qFsdBpr2/HD-wallpaper-glass-lime-coffee-beans-cocktail-drink.jpg" class="card-img" alt="Coffee Drink" loading="lazy">
+                <div class="card-content">
+                    <h3 class="card-title">Espresso Martini</h3>
+                    <div class="price">R$ 38,00</div>
+                </div>
+            </div>
+
+            <!-- 5. TÁBUA: MISTO (Largo) -->
+            <div class="card span-wide">
+                <span class="tag">Para Compartilhar</span>
+                <img src="https://i.ibb.co/v64JQc7P/b2cda7-3c8ea83f4e704de28d69aa11854a5b28-mv2.jpg" class="card-img" alt="Tabua" loading="lazy">
+                <div class="card-content">
+                    <h2 class="card-title">Tábua do Parrillero</h2>
+                    <p class="desc">Seleção dos nossos 5 melhores cortes: Picanha, Linguiça Artesanal, Coração e Queijo Coalho. Acompanha farofa de bacon e vinagrete.</p>
+                    <div class="price">R$ 180,00</div>
+                </div>
+            </div>
+
+            <!-- 6. NOVO: COSTELA BOVINA -->
+            <div class="card span-double">
+                <span class="tag">Defumado</span>
+                <img src="https://i.ibb.co/5hC90DpJ/costela-grelha-carne-de-porco-churrasco-costela-refeicao-frita-comida-lanche-na-mesa-copia-espaco-fu.avif" class="card-img" alt="Costela" loading="lazy">
+                <div class="card-content">
+                    <h3 class="card-title">Costela Royal BBQ</h3>
+                    <p class="desc">Costela assada por 12 horas, soltando do osso.</p>
+                    <div class="price">R$ 145,00</div>
+                </div>
+            </div>
+
+            <!-- 7. NOVO: CARNE (Steak) -->
+            <div class="card span-double">
+                <img src="https://i.ibb.co/6c6W1MKx/istockphoto-520421898-612x612.jpg" class="card-img" alt="Steak" loading="lazy">
+                <div class="card-content">
+                    <h3 class="card-title">Ancho Premium</h3>
+                    <p class="desc">Ojo de Bife grelhado ao ponto do cliente.</p>
+                    <div class="price">R$ 98,00</div>
+                </div>
+            </div>
+
+            <!-- 8. NOVO: FRANGO & FRITAS -->
+            <div class="card span-box">
+                <img src="https://i.ibb.co/sJCVnK5D/pngtree-grilled-chicken-steak-with-potato-chips-or-french-fries-image-15655819.jpg" class="card-img" alt="Frango" loading="lazy">
+                <div class="card-content">
+                    <h3 class="card-title">Galeto Dourado</h3>
+                    <div class="price">R$ 45,00</div>
+                </div>
+            </div>
+
+            <!-- 9. NOVO: PORCO -->
+            <div class="card span-box">
+                <img src="https://i.ibb.co/VcrrKdfk/pngtree-roasted-pork-steak-on-the-wooden-plate-with-thai-sauce-image-16126884.jpg" class="card-img" alt="Porco" loading="lazy">
+                <div class="card-content">
+                    <h3 class="card-title">Lombo Defumado</h3>
+                    <div class="price">R$ 48,00</div>
+                </div>
+            </div>
+
+            <!-- 10. NOVO: DRINK MENTA -->
+            <div class="card span-box">
+                <img src="https://i.ibb.co/Zzt2bLQb/pexels-isabella-mendes-107313-338713.jpg" class="card-img" alt="Mojito" loading="lazy">
+                <div class="card-content">
+                    <h3 class="card-title">Mojito Fresh</h3>
+                    <div class="price">R$ 29,00</div>
+                </div>
+            </div>
+
+            <!-- 11. NOVO: DRINK DARK -->
+            <div class="card span-box">
+                <img src="https://i.ibb.co/ksS4Kgft/1295248.jpg" class="card-img" alt="Dark Drink" loading="lazy">
+                <div class="card-content">
+                    <h3 class="card-title">Black Label Rock</h3>
+                    <div class="price">R$ 42,00</div>
+                </div>
+            </div>
+
+            <!-- 12. DRINK AZUL -->
+            <div class="card span-box">
+                <span class="tag">Assinatura</span>
+                <img src="https://i.ibb.co/2YjzB8Pt/wp12381010.jpg" class="card-img" alt="Blue Drink" loading="lazy">
+                <div class="card-content">
+                    <h3 class="card-title">Coquetel Safira</h3>
+                    <div class="price">R$ 30,00</div>
+                </div>
+            </div>
+
+            <!-- 13. DRINK LARANJA -->
+            <div class="card span-box">
+                <img src="https://i.ibb.co/qFd5BbGs/drink-uio74i0rowuwdowi.jpg" class="card-img" alt="Orange Drink" loading="lazy">
+                <div class="card-content">
+                    <h3 class="card-title">Sunset Vibes</h3>
+                    <div class="price">R$ 30,00</div>
+                </div>
+            </div>
+
+            <!-- 14. PORÇÃO -->
+            <div class="card span-double">
+                <span class="tag">Petisco</span>
+                <img src="https://i.ibb.co/9mfmLBt6/istockphoto-1191425335-612x612.jpg" class="card-img" alt="Porcao" loading="lazy">
+                <div class="card-content">
+                    <h3 class="card-title">Mix de Boteco</h3>
+                    <p class="desc">Iscas de frango, batata frita e calabresa acebolada.</p>
+                    <div class="price">R$ 65,00</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
