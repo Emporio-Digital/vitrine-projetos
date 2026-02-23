@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Despachante Elite | Soluções Veiculares Premium</title>
+    <title>Flash Despachante | Soluções Veiculares Profissionais</title>
     
     <!-- Fontes Google (Sora para títulos e Inter para texto) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,7 +54,7 @@
 
         .btn-primary {
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-            color: #0f172a; /* Texto escuro para contraste no amarelo */
+            color: #0f172a; 
             box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
             border: none;
         }
@@ -79,7 +79,7 @@
         }
 
         header.scrolled {
-            background: rgba(15, 23, 42, 0.95); /* Azul escuro sólido ao rolar */
+            background: rgba(15, 23, 42, 0.95); 
             padding: 15px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
@@ -94,10 +94,9 @@
 
         .menu-btn { display: none; color: white; font-size: 1.8rem; cursor: pointer; }
 
-        /* --- HERO SECTION (A NAVE) --- */
+        /* --- HERO SECTION --- */
         .hero {
             height: 100vh; min-height: 700px;
-            /* Imagem de Carro Preto de Luxo (Audi style) */
             background: linear-gradient(to right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%),
                         url('https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
             display: flex; align-items: center; position: relative;
@@ -115,8 +114,8 @@
 
         .hero h1 {
             font-size: 3.8rem; line-height: 1.1; margin-bottom: 25px;
-            color: #ffffff; /* Branco Puro */
-            text-shadow: 2px 2px 20px rgba(0,0,0,0.9); /* Sombra Forte */
+            color: #ffffff; 
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.9); 
         }
 
         .hero p {
@@ -170,7 +169,7 @@
         .service-card ul li { margin-bottom: 10px; display: flex; gap: 10px; align-items: center; color: #475569; }
         .service-card ul li i { color: var(--whatsapp); font-size: 0.9rem; }
 
-        /* --- SOBRE (DESIGN MODERNO) --- */
+        /* --- SOBRE --- */
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         
         .about-images { position: relative; height: 500px; }
@@ -187,7 +186,7 @@
         .check-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 15px; font-weight: 500; }
         .check-list i { background: #ecfccb; color: #65a30d; padding: 6px; border-radius: 50%; font-size: 0.8rem; }
 
-        /* --- CTA PARCELAMENTO --- */
+        /* --- CTA --- */
         .cta-parallax {
             background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)),
                         url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=2070&auto=format&fit=crop') fixed center/cover;
@@ -226,7 +225,7 @@
         .pulse { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: inherit; opacity: 0.6; animation: pulse 2s infinite; z-index: -1; }
         @keyframes pulse { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.6); opacity: 0; } }
 
-        /* --- RESPONSIVIDADE (A CORREÇÃO MÁGICA) --- */
+        /* --- RESPONSIVIDADE --- */
         @media (max-width: 992px) {
             .hero h1 { font-size: 3rem; }
             .about-grid { grid-template-columns: 1fr; }
@@ -235,7 +234,6 @@
         }
 
         @media (max-width: 768px) {
-            /* AJUSTE MENU */
             .nav-links {
                 position: fixed; top: 0; right: -100%; height: 100vh; width: 85%;
                 background: var(--white); flex-direction: column; justify-content: center;
@@ -245,25 +243,23 @@
             .nav-links a { color: var(--primary); font-size: 1.3rem; }
             .menu-btn { display: block; }
             
-            /* AJUSTE HERO (TOPO) */
             .hero { 
                 text-align: center; 
                 justify-content: center; 
                 height: auto; 
                 min-height: 100vh;
-                padding-bottom: 60px; /* Espaço extra embaixo */
+                padding-bottom: 60px; 
             }
             .hero-content { padding-top: 100px; padding-bottom: 20px; }
             .hero h1 { font-size: 2.2rem; } 
             .hero p { font-size: 1.1rem; }
             .hero-btns { justify-content: center; flex-direction: column; }
-            .btn { width: 100%; } /* Botões largura total no mobile */
+            .btn { width: 100%; } 
 
-            /* CORREÇÃO DO CARD FLUTUANTE (Aqui está a mágica) */
             .stats-container { 
-                margin-top: 20px; /* Não sobe mais por cima da imagem */
+                margin-top: 20px; 
                 margin-bottom: 40px;
-                transform: none; /* Remove efeito 3D que causava problema */
+                transform: none; 
             }
             
             .img-float { width: 60%; bottom: -20px; }
@@ -275,7 +271,7 @@
     <!-- NAV -->
     <header id="header">
         <div class="container navbar">
-            <a href="#" class="logo">Despachante<span>Elite</span></a>
+            <a href="#" class="logo">Flash<span>Despachante</span></a>
             
             <div class="menu-btn" id="menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -286,23 +282,22 @@
                 <a href="#services">Serviços</a>
                 <a href="#about">Sobre</a>
                 <a href="#faq">Dúvidas</a>
-                <a href="https://wa.me/5511999999999" class="btn btn-primary" style="margin-left: 10px;">
+                <a href="https://wa.me/5500000000000" class="btn btn-primary" style="margin-left: 10px;">
                     <i class="fab fa-whatsapp"></i> Falar no Zap
                 </a>
             </nav>
         </div>
     </header>
 
-    <!-- HERO SECTION (A Nave) -->
+    <!-- HERO SECTION -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
                 <span class="hero-badge"><i class="fas fa-star"></i> Excelência em Documentação</span>
-                <!-- TEXTO BRANCO FORTE -->
                 <h1>Dirija com liberdade. Sem burocracia.</h1>
                 <p>Regularize seu veículo com segurança e agilidade. Licenciamento, Transferência e Multas parceladas em até 12x no cartão.</p>
                 <div class="hero-btns">
-                    <a href="https://wa.me/5511999999999" class="btn btn-primary">
+                    <a href="https://wa.me/5500000000000" class="btn btn-primary">
                         Solicitar Orçamento <i class="fas fa-arrow-right"></i>
                     </a>
                     <a href="#services" class="btn btn-outline">
@@ -313,7 +308,7 @@
         </div>
     </section>
 
-    <!-- STATUS FLUTUANTE (Arrumado no Mobile) -->
+    <!-- STATUS FLUTUANTE -->
     <div class="container stats-container">
         <div class="stats-grid">
             <div class="stat-item">
@@ -346,7 +341,7 @@
                 <!-- Card 1 -->
                 <div class="service-card">
                     <div class="card-icon"><i class="fas fa-file-contract"></i></div>
-                    <h3>Licenciamento 2024</h3>
+                    <h3>Licenciamento Atual</h3>
                     <p style="margin-bottom: 20px;">Evite apreensões. Emitimos o seu licenciamento anual digital na hora.</p>
                     <ul>
                         <li><i class="fas fa-check-circle"></i> Envio PDF no WhatsApp</li>
@@ -384,9 +379,7 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-images">
-                    <!-- Imagem Escritório -->
                     <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1469&auto=format&fit=crop" alt="Escritório" class="img-main">
-                    <!-- Imagem Chave -->
                     <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop" alt="Carro na estrada" class="img-float" style="object-fit: cover; height: 200px;">
                 </div>
                 
@@ -402,7 +395,7 @@
                         <li><i class="fas fa-check"></i> Transparência nos valores</li>
                     </ul>
 
-                    <a href="https://wa.me/5511999999999" class="btn btn-primary" style="margin-top: 30px;">Falar com Especialista</a>
+                    <a href="https://wa.me/5500000000000" class="btn btn-primary" style="margin-top: 30px;">Falar com Especialista</a>
                 </div>
             </div>
         </div>
@@ -420,7 +413,7 @@
                 <i class="fab fa-cc-amex"></i>
             </div>
             
-            <a href="https://wa.me/5511999999999" class="btn btn-primary" style="background: white; color: var(--primary);">
+            <a href="https://wa.me/5500000000000" class="btn btn-primary" style="background: white; color: var(--primary);">
                 Simular Parcelamento Agora
             </a>
         </div>
@@ -472,8 +465,12 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <a href="#" class="footer-logo">Despachante<span>Elite</span></a>
+                    <a href="#" class="footer-logo">Sua<span>Marca</span></a>
                     <p>Simplificando a vida do motorista brasileiro com tecnologia e agilidade.</p>
+                    <p style="font-size: 0.85rem; margin-top: 15px; opacity: 0.8; line-height: 1.5;">
+                        Nome do Profissional Responsável<br>
+                        Registro Profissional nº 000000-0
+                    </p>
                     <div style="margin-top: 20px; display: flex; gap: 15px;">
                         <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
                         <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
@@ -493,21 +490,21 @@
                 <div class="footer-col">
                     <h4>Contato</h4>
                     <ul>
-                        <li><i class="fas fa-phone-alt" style="margin-right: 10px; color: var(--accent);"></i> (11) 99999-9999</li>
-                        <li><i class="fas fa-envelope" style="margin-right: 10px; color: var(--accent);"></i> contato@elite.com.br</li>
-                        <li><i class="fas fa-map-marker-alt" style="margin-right: 10px; color: var(--accent);"></i> Av. Paulista, 1000 - SP</li>
+                        <li><i class="fas fa-phone-alt" style="margin-right: 10px; color: var(--accent);"></i> (00) 00000-0000</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 10px; color: var(--accent);"></i> contato@suaempresa.com.br</li>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 10px; color: var(--accent);"></i> Endereço da Empresa, 000<br><span style="margin-left: 25px;">Bairro - Cidade / UF</span></li>
                     </ul>
                 </div>
             </div>
             
             <div style="text-align: center; font-size: 0.9rem; opacity: 0.7;">
-                &copy; 2024 Despachante Elite. Todos os direitos reservados.
+                &copy; 2026 Nome da Empresa. Todos os direitos reservados.
             </div>
         </div>
     </footer>
 
     <!-- WHATSAPP FLOAT -->
-    <a href="https://wa.me/5511999999999" target="_blank" class="whatsapp-float">
+    <a href="https://wa.me/5500000000000" target="_blank" class="whatsapp-float">
         <div class="pulse"></div>
         <i class="fab fa-whatsapp"></i>
     </a>
