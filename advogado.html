@@ -156,7 +156,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section (Mais equilibrado, elegante e impactante) -->
+    <!-- Hero Section (Mais equilibrado, elegante e impactante com Imagem de Destaque) -->
     <section class="relative min-h-[90vh] flex items-center justify-center pt-16 pb-20 px-6 md:px-12 overflow-hidden">
         <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 items-center relative z-10">
             
@@ -205,15 +205,29 @@
                 </div>
             </div>
 
-            <!-- Right Column: Card de Destaque Rápido -->
+            <!-- Right Column: Card com Imagem e Plantão -->
             <div class="lg:col-span-5" data-aos="fade-left" data-aos-duration="1000">
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden gold-glow border-gold/30">
+                <div class="glass-card p-6 sm:p-7 rounded-3xl relative overflow-hidden gold-glow border-gold/30">
                     <div class="absolute -right-10 -top-10 w-40 h-40 bg-gold/10 rounded-full blur-3xl pointer-events-none"></div>
                     
-                    <div class="flex items-center justify-between border-b border-white/10 pb-5 mb-6">
+                    <!-- Foto Banner Integrada ao Topo do Card -->
+                    <div class="relative w-full h-36 sm:h-40 rounded-2xl overflow-hidden mb-5 border border-gold/25">
+                        <img 
+                            src="hero-destaque.jpg" 
+                            alt="Equipe Jurídica Farias Advocacia" 
+                            class="w-full h-full object-cover filter brightness-[0.88]"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-2.5 left-3.5 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-green-400 animate-ping"></span>
+                            <span class="text-[10px] font-bold tracking-widest text-gold uppercase bg-black/60 backdrop-blur-sm px-2.5 py-1 rounded-md border border-white/10">Corpo Jurídico Ativo</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
                         <div>
                             <span class="text-[11px] font-bold tracking-widest text-gold uppercase block">Plantão de Atendimento</span>
-                            <h3 class="text-xl font-serif font-bold text-white mt-1">Precisa de auxílio urgente?</h3>
+                            <h3 class="text-xl font-serif font-bold text-white mt-0.5">Precisa de auxílio urgente?</h3>
                         </div>
                         <span class="flex h-3 w-3 relative">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -221,16 +235,16 @@
                         </span>
                     </div>
 
-                    <p class="text-sm text-gray-300 leading-relaxed mb-6 font-light">
+                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-5 font-light">
                         Situações jurídicas complexas demandam agilidade imediata. Envie sua dúvida diretamente para a equipe técnica de prontidão.
                     </p>
 
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center gap-3 text-xs text-gray-300 bg-black/40 p-3 rounded-lg border border-white/5">
+                    <div class="space-y-2.5 mb-5">
+                        <div class="flex items-center gap-3 text-xs text-gray-300 bg-black/40 p-2.5 rounded-lg border border-white/5">
                             <i data-lucide="clock" class="w-4 h-4 text-gold shrink-0"></i>
                             <span>Resposta média em menos de 15 minutos</span>
                         </div>
-                        <div class="flex items-center gap-3 text-xs text-gray-300 bg-black/40 p-3 rounded-lg border border-white/5">
+                        <div class="flex items-center gap-3 text-xs text-gray-300 bg-black/40 p-2.5 rounded-lg border border-white/5">
                             <i data-lucide="lock" class="w-4 h-4 text-gold shrink-0"></i>
                             <span>Sigilo garantido pelo Código de Ética da OAB</span>
                         </div>
@@ -268,54 +282,87 @@
         </div>
     </section>
 
-    <!-- Sessão: Autoridade e Valores -->
+    <!-- Sessão: Autoridade, Liderança e Valores -->
     <section id="sobre" class="py-20 md:py-28 px-6 max-w-7xl mx-auto">
-        <div class="glass-card p-8 md:p-14 rounded-3xl border-gold/30 relative overflow-hidden" data-aos="fade-up">
-            <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="glass-card p-6 sm:p-10 md:p-14 rounded-3xl border-gold/30 relative overflow-hidden" data-aos="fade-up">
+            
+            <!-- Grid Principal: Foto + Conteúdo -->
+            <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
-                <div class="lg:col-span-5">
-                    <span class="text-gold tracking-[0.3em] text-xs font-bold uppercase block mb-3">Nossa Fundação</span>
-                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-white leading-snug">
-                        Autoridade, Ética e <br><span class="gold-text-gradient italic">Conhecimento Profundo.</span>
-                    </h2>
-                    <div class="w-16 h-1 gold-gradient mt-6 mb-6 rounded-full"></div>
-                    <p class="text-gray-300 text-sm md:text-base leading-relaxed font-light">
-                        Acreditamos que a advocacia moderna exige técnica cirúrgica aliada à proximidade humana. Cada caso é tratado como uma prioridade única.
-                    </p>
+                <!-- Coluna da Foto (Efeito Moldura Dourada + Selo Flutuante) -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none rounded-2xl overflow-hidden border border-gold/40 shadow-[0_15px_40px_rgba(0,0,0,0.7)] group">
+                        <!-- Imagem com gradiente suave na base -->
+                        <img 
+                            src="advogado-sobre.jpg" 
+                            alt="Advogado Fundador - Farias Advocacia" 
+                            class="w-full h-[400px] sm:h-[480px] lg:h-[520px] object-cover object-top filter brightness-[0.95] group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                        
+                        <!-- Legenda interna na foto -->
+                        <div class="absolute bottom-4 left-4 right-4 bg-black/70 backdrop-blur-md p-4 rounded-xl border border-white/10">
+                            <div class="text-white font-serif font-bold text-base">Dr. Roberto Farias</div>
+                            <div class="text-gold text-xs font-medium tracking-wide">Sócio Fundador & Advogado Estrategista</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
-                    <div class="bg-black/50 p-6 rounded-2xl border border-gold/15 hover:border-gold/40 transition">
-                        <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center mb-4">
-                            <i data-lucide="shield" class="w-5 h-5 text-gold"></i>
+                <!-- Coluna de Texto e Valores -->
+                <div class="lg:col-span-7">
+                    <span class="text-gold tracking-[0.3em] text-xs font-bold uppercase block mb-3">Nossa Fundação & Liderança</span>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white leading-snug">
+                        Autoridade, Ética e <br><span class="gold-text-gradient italic">Conhecimento Profundo.</span>
+                    </h2>
+                    <div class="w-16 h-1 gold-gradient mt-4 mb-6 rounded-full"></div>
+                    
+                    <p class="text-gray-300 text-sm md:text-base leading-relaxed font-light mb-8">
+                        Sob liderança técnica e combativa, unimos décadas de experiência jurídica à inovação processual. Acreditamos que a advocacia de excelência exige estratégia cirúrgica aliada à proximidade humana com cada cliente.
+                    </p>
+
+                    <!-- 4 Pilares Compactos e Elegantes -->
+                    <div class="grid sm:grid-cols-2 gap-3.5">
+                        <div class="bg-black/50 p-4 rounded-xl border border-gold/15 flex items-start gap-3.5 hover:border-gold/40 transition">
+                            <div class="w-9 h-9 rounded-lg bg-gold/10 flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="shield" class="w-4 h-4 text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm mb-1">Ética Inegociável</h4>
+                                <p class="text-[11px] text-gray-400 leading-snug">Decisões justas, transparentes e alinhadas ao seu melhor interesse.</p>
+                            </div>
                         </div>
-                        <h4 class="text-white font-bold mb-2">Ética Inegociável</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed">Decisões justas, transparentes e alinhadas ao melhor interesse de cada cliente.</p>
+
+                        <div class="bg-black/50 p-4 rounded-xl border border-gold/15 flex items-start gap-3.5 hover:border-gold/40 transition">
+                            <div class="w-9 h-9 rounded-lg bg-gold/10 flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="target" class="w-4 h-4 text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm mb-1">Estratégia Sob Medida</h4>
+                                <p class="text-[11px] text-gray-400 leading-snug">Planejamento cirúrgico focado em redução drástica de riscos.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-black/50 p-4 rounded-xl border border-gold/15 flex items-start gap-3.5 hover:border-gold/40 transition">
+                            <div class="w-9 h-9 rounded-lg bg-gold/10 flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="zap" class="w-4 h-4 text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm mb-1">Agilidade Processual</h4>
+                                <p class="text-[11px] text-gray-400 leading-snug">Tecnologia jurídica para respostas e andamentos mais céleres.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-black/50 p-4 rounded-xl border border-gold/15 flex items-start gap-3.5 hover:border-gold/40 transition">
+                            <div class="w-9 h-9 rounded-lg bg-gold/10 flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="lock" class="w-4 h-4 text-gold"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold text-sm mb-1">Sigilo Rigoroso</h4>
+                                <p class="text-[11px] text-gray-400 leading-snug">Proteção absoluta de dados e informações confidenciais.</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="bg-black/50 p-6 rounded-2xl border border-gold/15 hover:border-gold/40 transition">
-                        <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center mb-4">
-                            <i data-lucide="target" class="w-5 h-5 text-gold"></i>
-                        </div>
-                        <h4 class="text-white font-bold mb-2">Estratégia sob Medida</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed">Planejamento focado em resultados sólidos e redução drástica de riscos.</p>
-                    </div>
-
-                    <div class="bg-black/50 p-6 rounded-2xl border border-gold/15 hover:border-gold/40 transition">
-                        <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center mb-4">
-                            <i data-lucide="zap" class="w-5 h-5 text-gold"></i>
-                        </div>
-                        <h4 class="text-white font-bold mb-2">Agilidade Processual</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed">Acompanhamento ativo e uso de tecnologia jurídica para respostas céleres.</p>
-                    </div>
-
-                    <div class="bg-black/50 p-6 rounded-2xl border border-gold/15 hover:border-gold/40 transition">
-                        <div class="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center mb-4">
-                            <i data-lucide="eye-off" class="w-5 h-5 text-gold"></i>
-                        </div>
-                        <h4 class="text-white font-bold mb-2">Sigilo Rigoroso</h4>
-                        <p class="text-xs text-gray-400 leading-relaxed">Proteção integral de dados e sigilo absoluto garantido em todas as etapas.</p>
-                    </div>
                 </div>
 
             </div>
@@ -465,6 +512,68 @@
                 </a>
             </div>
 
+        </div>
+    </section>
+
+    <!-- Nova Sessão: Estrutura & Atendimento Híbrido -->
+    <section class="py-16 md:py-24 px-6 max-w-7xl mx-auto">
+        <div class="glass-card p-6 sm:p-10 md:p-14 rounded-3xl border-gold/30 relative overflow-hidden" data-aos="fade-up">
+            <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                
+                <!-- Coluna de Texto e Diferenciais de Estrutura -->
+                <div class="lg:col-span-6 order-2 lg:order-1">
+                    <span class="text-gold tracking-[0.3em] text-xs font-bold uppercase block mb-3">Infraestrutura & Tecnologia</span>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white leading-snug">
+                        Atendimento Híbrido com <br><span class="gold-text-gradient italic">Alcance Nacional.</span>
+                    </h2>
+                    <div class="w-16 h-1 gold-gradient mt-4 mb-6 rounded-full"></div>
+                    
+                    <p class="text-gray-300 text-sm md:text-base leading-relaxed font-light mb-6">
+                        Combinamos a solenidade do atendimento presencial de alto padrão com ferramentas digitais criptografadas. Você tem acesso direto ao seu advogado onde quer que esteja, sem burocracias.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3.5 bg-black/40 p-3.5 rounded-xl border border-white/5">
+                            <div class="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center text-gold shrink-0">
+                                <i data-lucide="video" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-xs sm:text-sm">Reuniões Virtuais ou Presenciais</h4>
+                                <p class="text-[11px] text-gray-400">Flexibilidade para o seu dia a dia com a mesma atenção dedicada.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3.5 bg-black/40 p-3.5 rounded-xl border border-white/5">
+                            <div class="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center text-gold shrink-0">
+                                <i data-lucide="file-check" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-semibold text-xs sm:text-sm">Assinatura Digital Descomplicada</h4>
+                                <p class="text-[11px] text-gray-400">Validade jurídica total sem necessidade de deslocamento físico.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna da Foto (Escritório / Reunião) -->
+                <div class="lg:col-span-6 order-1 lg:order-2">
+                    <div class="relative rounded-2xl overflow-hidden border border-gold/30 shadow-[0_15px_40px_rgba(0,0,0,0.6)] group">
+                        <img 
+                            src="escritorio-estrutura.jpg" 
+                            alt="Estrutura e Escritório Farias Advocacia" 
+                            class="w-full h-[280px] sm:h-[360px] lg:h-[420px] object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-500"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+                        
+                        <!-- Tag flutuante de autoridade no canto -->
+                        <div class="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-gold/40 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
+                            <span class="text-[10px] sm:text-xs font-bold text-white uppercase tracking-wider">Padrão Executivo</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
